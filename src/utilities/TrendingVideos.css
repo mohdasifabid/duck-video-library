@@ -1,0 +1,10 @@
+
+.trending-videos-heading{
+    text-align: center;
+}
+.trending-videos-card-container{
+display: flex;   
+justify-content: center;
+flex-wrap: wrap;
+gap: 2rem;
+} 

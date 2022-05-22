@@ -1,0 +1,17 @@
+.watch-later-videos-body{
+    width: 90%;
+    margin: 0 5%;
+}
+.watch-later-videos-container{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
+  
+    
+}
+.watch-later-videos-card-container{
+    width: 25%;
+   
+}

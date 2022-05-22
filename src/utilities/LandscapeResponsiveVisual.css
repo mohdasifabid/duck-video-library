@@ -1,0 +1,32 @@
+
+.lrv-container{
+    width: 100%;
+    position: relative;
+}
+.lrv-media{
+    width: 100%;
+    height: 60vh;
+}
+.lrv-btn{
+    position: absolute;
+    width: 9rem;
+    left: 2rem;
+    bottom: 4rem;
+    background-color: red;
+    color: var(--secondary-color);
+}
+.lrv-btn:hover{
+    background-color: var(--secondary-color);
+    color: red;
+}
+.lrv-text-content{
+    position: absolute;
+    bottom: 8rem;
+    left: 2.9rem;
+    color: var(--secondary-color);
+}
+.lrv-text-content-bold{
+    font-weight: bold;
+    font-size: x-large;
+    margin-top: 0;
+}

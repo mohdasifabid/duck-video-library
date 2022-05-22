@@ -1,0 +1,40 @@
+.active-video-card-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: .1px solid var(--secondary-color);
+}
+.active-video-card-media{
+    width: 100%;
+    height: 70vh;
+}
+.fa-solid{
+    cursor: pointer;
+}
+.active-video-card-title {
+    margin-bottom: .125rem;
+}
+.active-video-card-sub-title{
+    margin-top: 0;
+}
+.active-video-card-bottom-content{
+    margin: .5rem 0 0 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: small;
+}
+.active-video-card-bottom-content-right-side{
+    display: flex;
+    flex-direction: row;
+}
+.active-video-card-icons-and-tags{
+margin-right: .5rem;
+}
+.active-video-card-description-title{
+    margin-bottom: 0;
+}
+.active-video-card-description-content{
+    margin-top: 0;
+}

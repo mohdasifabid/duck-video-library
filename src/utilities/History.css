@@ -1,0 +1,31 @@
+.history-videos-body{
+    width: 90%;
+    margin: 0 5%;
+}
+.history-videos-heading-clear-btn-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.history-videos-clear-btn{
+    width: 10rem;
+    background-color: red;
+    color: white;
+}
+/* .history-videos-clear-btn:hover{
+    background-color: var(--secondary-color);
+    color: red;
+} */
+.history-videos-container{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
+  
+    
+}
+.history-videos-card-container{
+    width: 25%;
+   
+}
