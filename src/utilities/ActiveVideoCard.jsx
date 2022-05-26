@@ -219,7 +219,7 @@ export const ActiveVideoCard = ({ item }) => {
                 })
               : null}
 
-            <label for="email" className="duck-modal-email-label">
+            <label htmlFor="email" className="duck-modal-email-label">
               Create playlist
               <input
                 type="text"
@@ -257,7 +257,7 @@ export const ActiveVideoCard = ({ item }) => {
           }}
         >
           <div className="duck-modal">
-            <label for="email" className="duck-modal-email-label">
+            <label htmlFor="email" className="duck-modal-email-label">
               Name your playlist
               <input
                 type="text"

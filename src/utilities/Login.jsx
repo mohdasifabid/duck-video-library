@@ -28,7 +28,7 @@ export const Login = () => {
       <Navbar />
       <div className="login-page-body-content">
         <div className="login-inputs-btn-link-container">
-          <label for="duck-email-input-label input-and-labels">
+          <label htmlFor="duck-email-input-label input-and-labels">
             <div>Email</div>
             <input
               type="email"
@@ -37,7 +37,7 @@ export const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </label>
-          <label for="duck-password-input-label input-and-labels">
+          <label htmlFor="duck-password-input-label input-and-labels">
             <div>Password</div>
             <input
               type="password"
@@ -55,9 +55,7 @@ export const Login = () => {
           <p>
             Not a user?
             <Link to="/signup">
-              <a href="">
-                <strong>create account</strong>
-              </a>
+              <strong>create account</strong>
             </Link>
           </p>
         </div>
