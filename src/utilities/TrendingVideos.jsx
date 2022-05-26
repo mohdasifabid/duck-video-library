@@ -48,6 +48,7 @@ export const TrendingVideos = () => {
             <p
               className="category-box"
               onClick={() => setCategoryCheck(cat.categoryName)}
+              key={cat._id}
             >
               {cat.categoryName}
             </p>

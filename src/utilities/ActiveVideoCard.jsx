@@ -55,6 +55,12 @@ export const ActiveVideoCard = ({ item }) => {
         },
       }
     );
+    if (response.status === 201) {
+      dispatch({
+        type: "GET_WATCH_LATER_VIDEOS",
+        payload: response.data.watchlater,
+      });
+    }
   };
   const postPlaylist = async () => {
     const token = localStorage.getItem("encodedToken");

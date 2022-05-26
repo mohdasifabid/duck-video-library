@@ -31,7 +31,13 @@ export const WatchLater = () => {
         <div className="watch-later-videos-container">
           <div className="watch-later-videos-card-container">
             {state.watchlaterVideos.map((watchLaterVid) => {
-              return <VideoCard type="later" item={watchLaterVid} />;
+              return (
+                <VideoCard
+                  type="later"
+                  item={watchLaterVid}
+                  key={watchLaterVid._id}
+                />
+              );
             })}
           </div>
         </div>
