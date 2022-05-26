@@ -9,65 +9,59 @@ export const LandingPage = () => {
       <Navbar />
       <div className="landing-page-body-container">
         <ol className="duck-list-content-type">
-          <Link to="/" className="landing-page-body-links">
-            <a className="duck-list-content-type-items" href="">
-              <div className="duck-link-avatar-polygon-type">
-                <a href="">
-                  <i className="fa-solid fa-house-chimney"></i>
-                </a>
-              </div>
-              Home
-            </a>
+          <Link
+            to="/"
+            className="landing-page-body-links duck-list-content-type-items"
+          >
+            <div className="duck-link-avatar-polygon-type">
+              <i className="fa-solid fa-house-chimney"></i>
+            </div>
+            Home
           </Link>
-          <Link to="/trending" className="landing-page-body-links">
-            <a className="duck-list-content-type-items" href="">
-              <div className="duck-link-avatar-polygon-type">
-                <a href="">
-                  <i className="fa-brands fa-gripfire"></i>
-                </a>
-              </div>
-              Trending
-            </a>
+          <Link
+            to="/trending"
+            className="landing-page-body-links duck-list-content-type-items"
+          >
+            <div className="duck-link-avatar-polygon-type">
+              <i className="fa-brands fa-gripfire"></i>
+            </div>
+            Trending
           </Link>
-          <Link to="/playlist" className="landing-page-body-links">
-            <a className="duck-list-content-type-items" href="">
-              <div className="duck-link-avatar-polygon-type">
-                <a href="">
-                  <i className="fa-solid fa-list"></i>
-                </a>
-              </div>
-              Playlist
-            </a>
+          <Link
+            to="/playlist"
+            className="landing-page-body-links duck-list-content-type-items"
+          >
+            <div className="duck-link-avatar-polygon-type">
+              <i className="fa-solid fa-list"></i>
+            </div>
+            Playlist
           </Link>
-          <Link to="/liked" className="landing-page-body-links">
-            <a className="duck-list-content-type-items" href="">
-              <div className="duck-link-avatar-polygon-type">
-                <a href="">
-                  <i className="fa-solid fa-thumbs-up"></i>
-                </a>
-              </div>
-              Liked
-            </a>
+          <Link
+            to="/liked"
+            className="landing-page-body-links duck-list-content-type-items"
+          >
+            <div className="duck-link-avatar-polygon-type">
+              <i className="fa-solid fa-thumbs-up"></i>
+            </div>
+            Liked
           </Link>
-          <Link to="/watch-later" className="landing-page-body-links">
-            <a className="duck-list-content-type-items" href="">
-              <div className="duck-link-avatar-polygon-type">
-                <a href="">
-                  <i className="fa-regular fa-clock"></i>
-                </a>
-              </div>
-              Later
-            </a>
+          <Link
+            to="/watch-later"
+            className="landing-page-body-links duck-list-content-type-items"
+          >
+            <div className="duck-link-avatar-polygon-type">
+              <i className="fa-regular fa-clock"></i>
+            </div>
+            Later
           </Link>
-          <Link to="/history" className="landing-page-body-links">
-            <a className="duck-list-content-type-items" href="">
-              <div className="duck-link-avatar-polygon-type">
-                <a href="">
-                  <i className="fa-solid fa-rotate-left"></i>
-                </a>
-              </div>
-              History
-            </a>
+          <Link
+            to="/history"
+            className="landing-page-body-links duck-list-content-type-items"
+          >
+            <div className="duck-link-avatar-polygon-type">
+              <i className="fa-solid fa-rotate-left"></i>
+            </div>
+            History
           </Link>
         </ol>
         <div className="landing-page-media-container">

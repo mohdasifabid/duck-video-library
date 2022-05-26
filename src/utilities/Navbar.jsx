@@ -11,10 +11,11 @@ export const Navbar = () => {
         padding: ".5rem 0",
       }}
     >
-      <Link className="duck-navbar-left-items" to="/">
-        <a href="" className="duck-navbar-brand duck-navbar-item">
-          MyBrand
-        </a>
+      <Link
+        className="duck-navbar-left-items duck-navbar-brand duck-navbar-item"
+        to="/"
+      >
+        MyBrand
       </Link>
       <div className="duck-navbar-right-items"></div>
       {state.isLogin ? (
