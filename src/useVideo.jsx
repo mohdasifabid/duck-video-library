@@ -27,7 +27,7 @@ const videoReducer = (state, action) => {
     case "GET_PLAYLISTS":
       return {
         ...state,
-        playlists: action.payload,
+        playlist: [...state.playlist, action.payload],
       };
     case "GET_HISTORY":
       return {
@@ -45,7 +45,7 @@ const initialState = {
   categories: [],
   likedVideos: [],
   watchlaterVideos: [],
-  playlists: [],
+  playlist: [],
   history: [],
 };
 const VideoProvider = ({ children }) => {

@@ -34,7 +34,7 @@ export const Playlist = () => {
             Clear Playlist
           </button>
         </div>
-        {state.playlists.map((item) => {
+        {state.playlist.map((item) => {
           return (
             <div className="playlist-body-content">
               <Link to={`/playlist/${item._id}`}>
