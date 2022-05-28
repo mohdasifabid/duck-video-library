@@ -21,12 +21,16 @@ function App() {
  const { dispatch } = useVideo();
  const { dispatch: authDispatch, state: authState} = useAuthProvider()
  useEffect(() => {
+  const token = localStorage.getItem("encodedToken");
   const getVideos = async () => {
-    const response = await axios.get("api/videos");
+    const response = await axios.get("api/videos",{
+      headers: {
+        authorization: token
+      }
+    });
     dispatch({ type: "GET_VIDEOS", payload: response.data.videos });
   };
   getVideos();
-  const token = localStorage.getItem("encodedToken");
   if(token){
     authDispatch({type:"LOGIN_STATUS", payload: true})
   } else {
