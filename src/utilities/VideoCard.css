@@ -1,5 +1,5 @@
 .video-card-container {
-  width: 300px;
+  width: 180px;
   position: relative;
 }
 .video-card-media {
@@ -27,4 +27,7 @@
 }
 .video-card-like-icon:hover {
   color: white;
+}
+.video-card-container p {
+  font-size: x-small;
 }
