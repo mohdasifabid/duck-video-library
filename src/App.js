@@ -44,9 +44,9 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<LandingPage/>}/>
+        {/* <Route path="/" element={<LandingPage/>}/> */}
         <Route path="/videos/:id" element={<VideoPage/>}/>
-        <Route path="/trending" element={<TrendingVideos/>}/>
+        <Route path="/" element={<TrendingVideos/>}/>
         <Route path="/playlist/:id" element={<Aplaylist/>}/>
         <Route path="/watch-later" element={<PrivateRoute/>} >
           <Route path="/watch-later" element={<WatchLater/>}/>
