@@ -39,8 +39,13 @@ margin-right: .5rem;
 font-size: x-small;
 
 }
+.active-video-card-description-container{
+    font-size: small;
+    padding-left: .5rem;
+}
 .active-video-card-description-title{
     margin-bottom: 0;
+    margin-top: 0.125rem;
 }
 .active-video-card-description-content{
     margin-top: 0;
