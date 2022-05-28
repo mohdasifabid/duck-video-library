@@ -94,11 +94,6 @@ export const ActiveVideoCard = ({ item }) => {
   };
   return (
     <div className="active-video-card-container">
-      <p className="active-video-card-title">
-        <strong>{item.title}</strong>
-      </p>
-
-      <p className="active-video-card-sub-title">{item.creator}</p>
       <iframe
         className="active-video-card-media"
         src={`https://youtube.com/embed/${item.vLink}`}
