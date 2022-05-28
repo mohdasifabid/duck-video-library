@@ -34,6 +34,19 @@ export const VideoPage = () => {
   return (
     <div>
       <Navbar />
+      <div className="category-container">
+        {state.categories.map((cat) => {
+          return (
+            <p
+              className="category-box"
+              onClick={() => setCategoryCheck(cat.categoryName)}
+              key={cat._id}
+            >
+              {cat.categoryName}
+            </p>
+          );
+        })}
+      </div>
       <div className="video-page-body">
         <div className="video-page-body-content-left-side">
           <ActiveVideoCard item={video} />

@@ -2,7 +2,7 @@
 .video-page-body{
     display: flex;
     flex-wrap: wrap;
-    margin: 2.5%;
+    margin: 0 2.5% 2.5% 2.5%;
     gap: 5%;
 
 }
@@ -15,7 +15,6 @@ width: 70%;
     flex-direction: column;
     gap: 1rem;
 }
-
 @media  (max-width: 500px) {
     .video-page-body-content-left-side{
         width: 100%;
