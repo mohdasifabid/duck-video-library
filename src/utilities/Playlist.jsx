@@ -11,7 +11,6 @@ export const Playlist = () => {
     const data = await getCall("/api/user/playlists");
     dispatch({ type: "GET_PLAYLISTS", payload: data.playlists });
   }, []);
-  console.log(state.playlist);
   return (
     <div>
       <Navbar />

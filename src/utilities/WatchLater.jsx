@@ -81,7 +81,7 @@ export const WatchLater = () => {
                     </li>
                     <span>
                       <i
-                        class="fa-solid fa-trash"
+                        className="fa-solid fa-trash"
                         onClick={() =>
                           deleteWatchedlaterVideoHandler(watchLaterVid._id)
                         }

@@ -85,13 +85,13 @@ export const LikedVideos = () => {
               <div>
                 {state.likedVideos.map((likedV) => {
                   return (
-                    <div className="list">
+                    <div className="list" key={likedV._id}>
                       <li onClick={() => navigate(`/videos/${likedV._id}`)}>
                         {likedV.title}
                       </li>
                       <span>
                         <i
-                          class="fa-solid fa-trash"
+                          className="fa-solid fa-trash"
                           onClick={() => deleteLikedVideoHandler(likedV._id)}
                         ></i>
                       </span>
