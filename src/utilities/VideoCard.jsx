@@ -1,26 +1,13 @@
-import axios from "axios";
 import { Link } from "react-router-dom";
 import { useVideo } from "../useVideo";
+import { postCall } from "./reusableFunctions";
 import "./VideoCard.css";
 
 export const VideoCard = ({ item, type }) => {
-  const { state, dispatch } = useVideo();
+  const { dispatch } = useVideo();
   const postHistory = async (video) => {
-    const token = localStorage.getItem("encodedToken");
-    const response = await axios.post(
-      "/api/user/history",
-      {
-        video,
-      },
-      {
-        headers: {
-          authorization: token,
-        },
-      }
-    );
-    if (response.status === 201) {
-      dispatch({ type: "GET_HISTORY", payload: response.data.history });
-    }
+    const data = postCall("/api/user/history", { video });
+    dispatch({ type: "GET_HISTORY", payload: data.history });
   };
 
   return (

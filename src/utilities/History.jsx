@@ -60,9 +60,10 @@ export const History = () => {
         </div>
         <div className="history-videos-container">
           <div className="history-videos-card-container">
-            {state.history.map((hvideo) => {
-              return <VideoCard item={hvideo} type="history" />;
-            })}
+            {state.history &&
+              state.history.map((hvideo) => {
+                return <VideoCard item={hvideo} type="history" />;
+              })}
           </div>
         </div>
       </div>
