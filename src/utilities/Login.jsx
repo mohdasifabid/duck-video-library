@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuthProvider } from "./authProvider";
 import "./Login.css";
 import { Navbar } from "./Navbar";
+import { postCall } from "./reusableFunctions";
 
 export const Login = () => {
   const { state, dispatch } = useAuthProvider();
@@ -12,16 +13,13 @@ export const Login = () => {
   const navigate = useNavigate();
 
   const saveEmailPassword = async () => {
-    const response = await axios.post("/api/auth/login", {
+    const data = await postCall("/api/auth/login", {
       email: email,
       password: password,
     });
-
-    if (response.status === 200) {
-      dispatch({ type: "LOGIN_STATUS", payload: true });
-      localStorage.setItem("encodedToken", response.data.encodedToken);
-      navigate("/");
-    }
+    dispatch({ type: "LOGIN_STATUS", payload: true });
+    localStorage.setItem("encodedToken", data.encodedToken);
+    navigate("/");
   };
   return (
     <div>
