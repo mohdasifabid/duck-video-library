@@ -1,13 +1,13 @@
-.liked-list{
+.list{
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: .5rem 1rem;
 }
-.liked-list li{
+.list li{
     margin-right: 3rem;
     cursor: pointer;
 }
-.liked-list i{
+.list i{
     cursor: pointer;
 }

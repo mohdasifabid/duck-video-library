@@ -85,7 +85,7 @@ export const LikedVideos = () => {
               <div>
                 {state.likedVideos.map((likedV) => {
                   return (
-                    <div className="liked-list">
+                    <div className="list">
                       <li onClick={() => navigate(`/videos/${likedV._id}`)}>
                         {likedV.title}
                       </li>

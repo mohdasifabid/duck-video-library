@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useVideo } from "../useVideo";
 import "./ActiveVideoCard.css";
 import { deleteCall, postCall } from "./reusableFunctions";
@@ -20,13 +20,6 @@ export const ActiveVideoCard = ({ item }) => {
     dispatch({ type: "GET_LIKED_VIDEOS", payload: data.likes });
   };
 
-  const postWatchlaterVideo = async (watchlaterVideo) => {
-    const data = await postCall("/api/user/watchlater", {
-      video: watchlaterVideo,
-    });
-    dispatch({ type: "GET_WATCH_LATER_VIDEOS", payload: data.watchlater });
-  };
-
   const postPlaylist = async () => {
     const data = await postCall("/api/user/playlists", {
       playlist: {
@@ -37,8 +30,21 @@ export const ActiveVideoCard = ({ item }) => {
     dispatch({ type: "GET_PLAYLISTS", payload: data.playlist });
   };
 
-  let inLikedVideos = state.likedVideos.some((vid) => vid._id === item._id);
+  const postWatchlaterVideo = async (watchlaterVideo) => {
+    const data = await postCall("/api/user/watchlater", {
+      video: watchlaterVideo,
+    });
+    dispatch({ type: "GET_WATCH_LATER_VIDEOS", payload: data.watchlater });
+  };
 
+  const deleteFromWatchLaterHandler = async (id) => {
+    const data = await deleteCall(`/api/user/watchlater/${id}`);
+    dispatch({ type: "GET_WATCH_LATER_VIDEOS", payload: data.watchlater });
+  };
+  const inLikedVideos = state.likedVideos.some((vid) => vid._id === item._id);
+  const inWatchlaterVideos = state.watchlaterVideos.some(
+    (vid) => vid._id === item._id
+  );
   return (
     <div className="active-video-card-container">
       <iframe
@@ -83,13 +89,26 @@ export const ActiveVideoCard = ({ item }) => {
               <i className="fa-solid fa-thumbs-down"></i>
             </span>
           )}
-          <span className="active-video-card-icons-and-tags">
-            <i
-              className="fa-solid fa-heart"
-              onClick={() => postWatchlaterVideo(item)}
-            ></i>
-            Watch Later
-          </span>
+          {/* watchlater section */}
+          {inWatchlaterVideos ? (
+            <span
+              className="active-video-card-icons-and-tags"
+              onClick={() => deleteFromWatchLaterHandler(item._id)}
+            >
+              <i className="fa-solid fa-heart"></i>
+              Watch Later
+            </span>
+          ) : (
+            <span
+              className="active-video-card-icons-and-tags"
+              onClick={() => {
+                postWatchlaterVideo(item);
+              }}
+            >
+              <i className="fa-regular fa-heart"></i>
+              Watch Later
+            </span>
+          )}
           <span className="active-video-card-icons-and-tags">
             <i
               className="fa-solid fa-list"

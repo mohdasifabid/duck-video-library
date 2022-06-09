@@ -1,16 +1,21 @@
 import { useEffect } from "react";
 import { useVideo } from "../useVideo";
 import { Navbar } from "./Navbar";
-import { getCall } from "./reusableFunctions";
-import { VideoCard } from "./VideoCard";
+import { deleteCall, getCall } from "./reusableFunctions";
 import "./WatchLater.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export const WatchLater = () => {
   const { state, dispatch } = useVideo();
+  const navigate = useNavigate();
   useEffect(async () => {
     const data = await getCall("/api/user/watchlater");
     dispatch({ type: "GET_WATCH_LATER_VIDEOS", payload: data.watchlater });
   }, []);
+  const deleteWatchedlaterVideoHandler = async (id) => {
+    const data = await deleteCall(`/api/user/watchlater/${id}`);
+    dispatch({ type: "GET_WATCH_LATER_VIDEOS", payload: data.watchlater });
+  };
+
   return (
     <div>
       <Navbar />
@@ -65,14 +70,24 @@ export const WatchLater = () => {
         <div className="watch-later-videos-body">
           <h1>Watch Later</h1>
           <div className="watch-later-videos-container">
-            <div className="watch-later-videos-card-container">
+            <div>
               {state.watchlaterVideos.map((watchLaterVid) => {
                 return (
-                  <VideoCard
-                    type="later"
-                    item={watchLaterVid}
-                    key={watchLaterVid._id}
-                  />
+                  <div className="list" key={watchLaterVid._id}>
+                    <li
+                      onClick={() => navigate(`/videos/${watchLaterVid._id}`)}
+                    >
+                      {watchLaterVid.title}
+                    </li>
+                    <span>
+                      <i
+                        class="fa-solid fa-trash"
+                        onClick={() =>
+                          deleteWatchedlaterVideoHandler(watchLaterVid._id)
+                        }
+                      ></i>
+                    </span>
+                  </div>
                 );
               })}
             </div>
