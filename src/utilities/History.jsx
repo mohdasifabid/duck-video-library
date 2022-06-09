@@ -8,8 +8,8 @@ import { getCall } from "./reusableFunctions";
 
 export const History = () => {
   const { state, dispatch } = useVideo();
-  useEffect(() => {
-    const data = getCall("/api/user/history");
+  useEffect(async () => {
+    const data = await getCall("/api/user/history");
     dispatch({ type: "GET_HISTORY", payload: data.history });
   }, []);
 
