@@ -35,6 +35,10 @@ export const ActiveVideoCard = ({ item }) => {
       },
     });
   };
+
+  let inLikedVideos = state.likedVideos.some((vid) => vid._id === item._id);
+  console.log(inLikedVideos);
+
   return (
     <div className="active-video-card-container">
       <iframe
@@ -51,23 +55,33 @@ export const ActiveVideoCard = ({ item }) => {
         style={{ position: "relative" }}
       >
         <div className="activ-video-card-icons-container">
-          <span className="active-video-card-icons-and-tags">
-            <i
-              className="fa-solid fa-thumbs-up"
-              onClick={() => {
-                postLikedVideo(item);
-              }}
-            ></i>
+          <span
+            className="active-video-card-icons-and-tags"
+            onClick={() => {
+              postLikedVideo(item);
+            }}
+          >
+            {inLikedVideos ? (
+              <i className="fa-solid fa-thumbs-up"></i>
+            ) : (
+              <i className="fa-regular fa-thumbs-up"></i>
+            )}
           </span>
-          <span className="active-video-card-icons-and-tags">
-            <i
-              className="fa-solid fa-thumbs-down"
-              onClick={() => {
-                deleteDislikedVideo(item);
-                setDislikes(dislikes + 1);
-              }}
-            ></i>{" "}
-          </span>
+          {inLikedVideos ? (
+            <span className="active-video-card-icons-and-tags">
+              <i
+                className="fa-regular fa-thumbs-down"
+                onClick={() => {
+                  deleteDislikedVideo(item);
+                  //   setDislikes(dislikes + 1);
+                }}
+              ></i>
+            </span>
+          ) : (
+            <span className="active-video-card-icons-and-tags">
+              <i className="fa-solid fa-thumbs-down"></i>
+            </span>
+          )}
           <span className="active-video-card-icons-and-tags">
             <i
               className="fa-solid fa-heart"
