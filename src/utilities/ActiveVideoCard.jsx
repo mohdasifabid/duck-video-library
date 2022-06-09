@@ -30,35 +30,11 @@ export const ActiveVideoCard = ({ item }) => {
   };
 
   const postPlaylist = async () => {
-    const token = localStorage.getItem("encodedToken");
-    const response = await axios.post(
-      "/api/user/playlists",
-      {
-        playlist: {
-          title: playlistName,
-        },
+    const data = await postCall("/api/user/playlists", {
+      playlist: {
+        title: playlistName,
       },
-      {
-        headers: {
-          authorization: token,
-        },
-      }
-    );
-    if (response.status === 201) {
-      console.log(response.data.playlist._id);
-      const responseOfPostingVideoInPlaylist = await axios.post(
-        `/api/user/playlists/${response.data.playlist._id}`,
-        {
-          video: item,
-        },
-        {
-          headers: {
-            authorization: token,
-          },
-        }
-      );
-      console.log("videoAdded", responseOfPostingVideoInPlaylist);
-    }
+    });
   };
   return (
     <div className="active-video-card-container">

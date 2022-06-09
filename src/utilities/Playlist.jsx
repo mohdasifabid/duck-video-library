@@ -7,7 +7,6 @@ import { getCall } from "./reusableFunctions";
 
 export const Playlist = () => {
   const { state, dispatch } = useVideo();
-
   useEffect(async () => {
     const data = await getCall("/api/user/playlists");
     dispatch({ type: "GET_PLAYLISTS", payload: data.playlists });
