@@ -1,5 +1,4 @@
 import "./App.css";
-import axios from "axios";
 import { useEffect } from "react";
 import { useVideo } from "./useVideo";
 import { Login } from "./utilities/Login";
@@ -8,29 +7,24 @@ import { Routes, Route} from "react-router-dom"
 import { Playlist } from "./utilities/Playlist";
 import { VideoPage } from "./utilities/VideoPage";
 import { WatchLater } from "./utilities/WatchLater";
-import { LandingPage} from "./utilities/LandingPage";
 import { TrendingVideos } from "./utilities/TrendingVideos";
 import { useAuthProvider } from "./utilities/authProvider";
 import { PrivateRoute } from "./utilities/PrivateRoute";
 import { Signup } from "./utilities/Signup";
 import { LikedVideos } from "./LikedVideos";
 import { Aplaylist } from "./utilities/aPlaylist";
+import { getCall } from "./utilities/reusableFunctions";
 
 
 function App() {  
  const { dispatch } = useVideo();
  const { dispatch: authDispatch, state: authState} = useAuthProvider()
- useEffect(() => {
+ useEffect(async() => {
   const token = localStorage.getItem("encodedToken");
-  const getVideos = async () => {
-    const response = await axios.get("api/videos",{
-      headers: {
-        authorization: token
-      }
-    });
-    dispatch({ type: "GET_VIDEOS", payload: response.data.videos });
-  };
-  getVideos();
+
+  const data = await getCall("api/videos")
+  dispatch({ type: "GET_VIDEOS", payload: data.videos });
+
   if(token){
     authDispatch({type:"LOGIN_STATUS", payload: true})
   } else {
@@ -44,7 +38,6 @@ function App() {
   return (
     <div>
       <Routes>
-        {/* <Route path="/" element={<LandingPage/>}/> */}
         <Route path="/videos/:id" element={<VideoPage/>}/>
         <Route path="/" element={<TrendingVideos/>}/>
         <Route path="/playlist/:id" element={<Aplaylist/>}/>
