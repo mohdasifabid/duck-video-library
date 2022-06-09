@@ -9,6 +9,7 @@ export const ActiveVideoCard = ({ item }) => {
   const [dislikes, setDislikes] = useState(0);
   const [creatingPlaylist, setCreatingPlaylist] = useState(false);
   const [playlistName, setPlaylistName] = useState("");
+
   const postLikedVideo = async (likedVideo) => {
     const data = await postCall("/api/user/likes", {
       video: likedVideo,
@@ -20,25 +21,15 @@ export const ActiveVideoCard = ({ item }) => {
     const data = await deleteCall(`/api/user/likes/${dislikedVideo._id}`);
     dispatch({ type: "GET_LIKED_VIDEOS", payload: data.likes });
   };
+
   const postWatchlaterVideo = async (watchlaterVideo) => {
-    const token = localStorage.getItem("encodedToken");
-    const response = await axios.post(
-      "/api/user/watchlater",
-      {
-        video: watchlaterVideo,
-      },
-      {
-        headers: {
-          authorization: token,
-        },
-      }
-    );
-    if (response.status === 201) {
-      dispatch({
-        type: "GET_WATCH_LATER_VIDEOS",
-        payload: response.data.watchlater,
-      });
-    }
+    const data = await postCall("/api/user/watchlater", {
+      video: watchlaterVideo,
+    });
+    dispatch({
+      type: "GET_WATCH_LATER_VIDEOS",
+      payload: data.watchlater,
+    });
   };
 
   const postPlaylist = async () => {
