@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useVideo } from "../useVideo";
 import "./ActiveVideoCard.css";
-import { postCall } from "./reusableFunctions";
+import { deleteCall, postCall } from "./reusableFunctions";
 
 export const ActiveVideoCard = ({ item }) => {
   const { state, dispatch } = useVideo();
@@ -17,18 +17,8 @@ export const ActiveVideoCard = ({ item }) => {
   };
 
   const deleteDislikedVideo = async (dislikedVideo) => {
-    const token = localStorage.getItem("encodedToken");
-    const response = await axios.delete(
-      `/api/user/likes/${dislikedVideo._id}`,
-      {
-        headers: {
-          authorization: token,
-        },
-        data: {
-          video: dislikedVideo,
-        },
-      }
-    );
+    const data = await deleteCall(`/api/user/likes/${dislikedVideo._id}`);
+    dispatch({ type: "GET_LIKED_VIDEOS", payload: data.likes });
   };
   const postWatchlaterVideo = async (watchlaterVideo) => {
     const token = localStorage.getItem("encodedToken");
