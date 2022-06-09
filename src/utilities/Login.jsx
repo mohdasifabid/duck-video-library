@@ -1,3 +1,4 @@
+import { getDefaultNormalizer } from "@testing-library/react";
 import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -16,6 +17,15 @@ export const Login = () => {
     const data = await postCall("/api/auth/login", {
       email: email,
       password: password,
+    });
+    dispatch({ type: "LOGIN_STATUS", payload: true });
+    localStorage.setItem("encodedToken", data.encodedToken);
+    navigate("/");
+  };
+  const guestLoginHandler = async () => {
+    const data = await postCall("/api/auth/login", {
+      email: "ducktube@gmail.com",
+      password: "duckTube123",
     });
     dispatch({ type: "LOGIN_STATUS", payload: true });
     localStorage.setItem("encodedToken", data.encodedToken);
@@ -45,10 +55,16 @@ export const Login = () => {
             />
           </label>
           <button
-            className="duck-primary-btn-s duck-primary-btn"
+            className="duck-primary-btn-xl duck-primary-btn"
             onClick={saveEmailPassword}
           >
             Login
+          </button>
+          <button
+            className="duck-primary-btn-xl duck-primary-btn"
+            onClick={guestLoginHandler}
+          >
+            Login as Guest
           </button>
           <p>
             Not a user?
