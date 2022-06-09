@@ -29,7 +29,6 @@ function App() {
     authDispatch({type:"LOGIN_STATUS", payload: true})
   } else {
     authDispatch({type:"LOGIN_STATUS", payload: false})
-
   }
 }, []);
 
