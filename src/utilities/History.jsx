@@ -4,7 +4,7 @@ import "./History.css";
 import { useEffect } from "react";
 import axios from "axios";
 import { useVideo } from "../useVideo";
-import { getCall } from "./reusableFunctions";
+import { deleteCall, getCall } from "./reusableFunctions";
 
 export const History = () => {
   const { state, dispatch } = useVideo();
@@ -14,26 +14,8 @@ export const History = () => {
   }, []);
 
   const deleteHistory = async () => {
-    const token = localStorage.getItem("encodedToken");
-    const response = await axios.delete("/api/user/history/all", {
-      headers: {
-        authorization: token,
-      },
-    });
-    if (response.status === 200) {
-      const getHistory = async () => {
-        const token = localStorage.getItem("encodedToken");
-        const response = await axios.get("/api/user/history", {
-          headers: {
-            authorization: token,
-          },
-        });
-        if (response.status === 200) {
-          dispatch({ type: "GET_HISTORY", payload: response.data.history });
-        }
-      };
-      getHistory();
-    }
+    const data = await deleteCall("/api/user/history/all");
+    dispatch({ type: "GET_HISTORY", payload: data.history });
   };
 
   return (
