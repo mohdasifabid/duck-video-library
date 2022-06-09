@@ -1,8 +1,8 @@
 
 .video-page-body{
     display: flex;
-    flex-wrap: wrap;
-    margin: 0 2.5% 2.5% 2.5%;
+    /* flex-wrap: wrap; */
+    margin: 1rem 2rem 2rem 0;
     gap: 5%;
 
 }
@@ -26,5 +26,8 @@ width: 70%;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+    }
+    .video-page-body{
+        flex-wrap: wrap;
     }
 }
