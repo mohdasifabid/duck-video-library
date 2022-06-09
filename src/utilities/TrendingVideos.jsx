@@ -13,6 +13,8 @@ export const TrendingVideos = () => {
   useEffect(async () => {
     const data = await getCall("/api/categories");
     dispatch({ type: "GET_CATEGORIES", payload: data.categories });
+    const videoData = await getCall("api/videos");
+    dispatch({ type: "GET_VIDEOS", payload: videoData.videos });
   }, []);
 
   const filterCategory = (data, checker) => {

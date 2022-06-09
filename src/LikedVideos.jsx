@@ -4,9 +4,11 @@ import { useVideo } from "./useVideo";
 import { Navbar } from "./utilities/Navbar";
 import { VideoCard } from "./utilities/VideoCard";
 import "./utilities/WatchLater.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { deleteCall } from "./utilities/reusableFunctions";
 export const LikedVideos = () => {
   const { state, dispatch } = useVideo();
+  const navigate = useNavigate();
   useEffect(() => {
     const getLikedVideos = async () => {
       const token = localStorage.getItem("encodedToken");
@@ -21,6 +23,10 @@ export const LikedVideos = () => {
     };
     getLikedVideos();
   }, []);
+  const deleteLikedVideoHandler = async (id) => {
+    const data = await deleteCall(`/api/user/likes/${id}`);
+    dispatch({ type: "GET_LIKED_VIDEOS", payload: data.likes });
+  };
   return (
     <div>
       <Navbar />
@@ -76,9 +82,21 @@ export const LikedVideos = () => {
           <h1>Liked videos</h1>
           <div className="watch-later-videos-container">
             {state.likedVideos.length > 0 && (
-              <div className="watch-later-videos-card-container">
+              <div>
                 {state.likedVideos.map((likedV) => {
-                  return <VideoCard type="lv" item={likedV} />;
+                  return (
+                    <div className="liked-list">
+                      <li onClick={() => navigate(`/videos/${likedV._id}`)}>
+                        {likedV.title}
+                      </li>
+                      <span>
+                        <i
+                          class="fa-solid fa-trash"
+                          onClick={() => deleteLikedVideoHandler(likedV._id)}
+                        ></i>
+                      </span>
+                    </div>
+                  );
                 })}
               </div>
             )}
