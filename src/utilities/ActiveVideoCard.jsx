@@ -5,7 +5,6 @@ import { deleteCall, postCall } from "./reusableFunctions";
 
 export const ActiveVideoCard = ({ item }) => {
   const { state, dispatch } = useVideo();
-  const [dislikes, setDislikes] = useState(0);
   const [creatingPlaylist, setCreatingPlaylist] = useState(false);
   const [playlistName, setPlaylistName] = useState("");
 
@@ -56,27 +55,28 @@ export const ActiveVideoCard = ({ item }) => {
         style={{ position: "relative" }}
       >
         <div className="activ-video-card-icons-container">
-          <span
-            className="active-video-card-icons-and-tags"
-            onClick={() => {
-              postLikedVideo(item);
-            }}
-          >
-            {inLikedVideos ? (
-              <i className="fa-solid fa-thumbs-up"></i>
-            ) : (
-              <i className="fa-regular fa-thumbs-up"></i>
-            )}
-          </span>
           {inLikedVideos ? (
             <span className="active-video-card-icons-and-tags">
-              <i
-                className="fa-regular fa-thumbs-down"
-                onClick={() => {
-                  deleteDislikedVideo(item);
-                  //   setDislikes(dislikes + 1);
-                }}
-              ></i>
+              <i className="fa-solid fa-thumbs-up"></i>
+            </span>
+          ) : (
+            <span
+              className="active-video-card-icons-and-tags"
+              onClick={() => {
+                postLikedVideo(item);
+              }}
+            >
+              <i className="fa-regular fa-thumbs-up"></i>
+            </span>
+          )}
+          {inLikedVideos ? (
+            <span
+              className="active-video-card-icons-and-tags"
+              onClick={() => {
+                deleteDislikedVideo(item);
+              }}
+            >
+              <i className="fa-regular fa-thumbs-down"></i>
             </span>
           ) : (
             <span className="active-video-card-icons-and-tags">
