@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useVideo } from "../useVideo";
 import "./ActiveVideoCard.css";
+import { postCall } from "./reusableFunctions";
 
 export const ActiveVideoCard = ({ item }) => {
   const { state, dispatch } = useVideo();
@@ -9,22 +10,12 @@ export const ActiveVideoCard = ({ item }) => {
   const [creatingPlaylist, setCreatingPlaylist] = useState(false);
   const [playlistName, setPlaylistName] = useState("");
   const postLikedVideo = async (likedVideo) => {
-    const token = localStorage.getItem("encodedToken");
-    const response = await axios.post(
-      "/api/user/likes",
-      {
-        video: likedVideo,
-      },
-      {
-        headers: {
-          authorization: token,
-        },
-      }
-    );
-    if (response.status === 201) {
-      dispatch({ type: "GET_LIKED_VIDEOS", payload: response.data.likes });
-    }
+    const data = await postCall("/api/user/likes", {
+      video: likedVideo,
+    });
+    dispatch({ type: "GET_LIKED_VIDEOS", payload: data.likes });
   };
+
   const deleteDislikedVideo = async (dislikedVideo) => {
     const token = localStorage.getItem("encodedToken");
     const response = await axios.delete(
