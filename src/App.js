@@ -21,7 +21,6 @@ function App() {
  const { dispatch: authDispatch, state: authState} = useAuthProvider()
  useEffect(async() => {
   const token = localStorage.getItem("encodedToken");
-
   const data = await getCall("api/videos")
   dispatch({ type: "GET_VIDEOS", payload: data.videos });
 

@@ -36,17 +36,17 @@ export const TrendingVideos = () => {
       <div className="category-container">
         {state.categories.map((cat) => {
           return (
-            <p
+            <button
               className="category-box"
               onClick={() => setCategoryCheck(cat.categoryName)}
               key={cat._id}
             >
               {cat.categoryName}
-            </p>
+            </button>
           );
         })}
       </div>
-      <div className="landing-page-body-container">
+      <div className="landing-page-body-container trending-page-body">
         <ol className="duck-list-content-type">
           <Link
             to="/"
@@ -56,15 +56,6 @@ export const TrendingVideos = () => {
               <i className="fa-solid fa-house-chimney"></i>
             </div>
             Home
-          </Link>
-          <Link
-            to="/"
-            className="landing-page-body-links duck-list-content-type-items"
-          >
-            <div className="duck-link-avatar-polygon-type">
-              <i className="fa-brands fa-gripfire"></i>
-            </div>
-            Trending
           </Link>
           <Link
             to="/playlist"
