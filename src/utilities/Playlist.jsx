@@ -23,17 +23,18 @@ export const Playlist = () => {
             Clear Playlist
           </button>
         </div>
-        {state.playlist.map((item) => {
-          return (
-            <div className="playlist-body-content" key={item_id}>
-              <Link to={`/playlist/${item._id}`}>
-                <p className="playlist-body-content-playlist-name">
-                  <strong>{item.title}</strong>
-                </p>
-              </Link>
-            </div>
-          );
-        })}
+        {state.playlist &&
+          state.playlist.map((item) => {
+            return (
+              <div className="playlist-body-content" key={item._id}>
+                <Link to={`/playlist/${item._id}`}>
+                  <p className="playlist-body-content-playlist-name">
+                    <strong>{item.title}</strong>
+                  </p>
+                </Link>
+              </div>
+            );
+          })}
       </div>
     </div>
   );

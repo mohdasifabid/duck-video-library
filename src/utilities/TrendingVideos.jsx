@@ -1,28 +1,18 @@
+import "./TrendingVideos.css";
 import { Navbar } from "./Navbar";
 import { VideoCard } from "./VideoCard";
-import "./TrendingVideos.css";
 import { useVideo } from "../useVideo";
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getCall } from "./reusableFunctions";
 
 export const TrendingVideos = () => {
   const { state, dispatch } = useVideo();
   const [categoryChecker, setCategoryCheck] = useState("");
 
-  useEffect(() => {
-    const token = localStorage.getItem("encodedToken");
-    const getCategoryData = async () => {
-      const response = await axios.get("/api/categories", {
-        headers: {
-          authorization: token,
-        },
-      });
-      if (response.status === 200) {
-        dispatch({ type: "GET_CATEGORIES", payload: response.data.categories });
-      }
-    };
-    getCategoryData();
+  useEffect(async () => {
+    const data = await getCall("/api/categories");
+    dispatch({ type: "GET_CATEGORIES", payload: data.categories });
   }, []);
 
   const filterCategory = (data, checker) => {
