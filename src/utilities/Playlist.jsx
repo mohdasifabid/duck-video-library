@@ -1,26 +1,16 @@
-import axios from "axios";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useVideo } from "../useVideo";
 import { Navbar } from "./Navbar";
 import "./Playlist.css";
+import { getCall } from "./reusableFunctions";
 
 export const Playlist = () => {
   const { state, dispatch } = useVideo();
 
-  useEffect(() => {
-    const getPlaylist = async () => {
-      const token = localStorage.getItem("encodedToken");
-      const response = await axios.get("/api/user/playlists", {
-        headers: {
-          authorization: token,
-        },
-      });
-      if (response.status === 200) {
-        dispatch({ type: "GET_PLAYLISTS", payload: response.data.playlists });
-      }
-    };
-    getPlaylist();
+  useEffect(async () => {
+    const data = await getCall("/api/user/playlists");
+    dispatch({ type: "GET_PLAYLISTS", payload: data.playlists });
   }, []);
 
   return (
@@ -35,7 +25,7 @@ export const Playlist = () => {
         </div>
         {state.playlist.map((item) => {
           return (
-            <div className="playlist-body-content">
+            <div className="playlist-body-content" key={item_id}>
               <Link to={`/playlist/${item._id}`}>
                 <p className="playlist-body-content-playlist-name">
                   <strong>{item.title}</strong>

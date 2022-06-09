@@ -1,13 +1,13 @@
-import { Navbar } from "./Navbar";
-import { VideoCard } from "./VideoCard";
 import "./History.css";
 import { useEffect } from "react";
-import axios from "axios";
+import { Navbar } from "./Navbar";
+import { VideoCard } from "./VideoCard";
 import { useVideo } from "../useVideo";
 import { deleteCall, getCall } from "./reusableFunctions";
 
 export const History = () => {
   const { state, dispatch } = useVideo();
+
   useEffect(async () => {
     const data = await getCall("/api/user/history");
     dispatch({ type: "GET_HISTORY", payload: data.history });
