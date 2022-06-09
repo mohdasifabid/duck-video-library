@@ -15,7 +15,7 @@ export const Playlist = () => {
   return (
     <div>
       <Navbar />
-      <div className="playlist-container">
+      <div className="common-container">
         <ol className="duck-list-content-type">
           <Link
             to="/"
