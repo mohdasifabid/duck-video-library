@@ -26,10 +26,7 @@ export const ActiveVideoCard = ({ item }) => {
     const data = await postCall("/api/user/watchlater", {
       video: watchlaterVideo,
     });
-    dispatch({
-      type: "GET_WATCH_LATER_VIDEOS",
-      payload: data.watchlater,
-    });
+    dispatch({ type: "GET_WATCH_LATER_VIDEOS", payload: data.watchlater });
   };
 
   const postPlaylist = async () => {
