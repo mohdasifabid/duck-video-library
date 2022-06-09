@@ -27,7 +27,7 @@ const videoReducer = (state, action) => {
     case "GET_PLAYLISTS":
       return {
         ...state,
-        playlist: [...state.playlist, action.payload],
+        playlist: action.payload,
       };
     case "GET_HISTORY":
       return {

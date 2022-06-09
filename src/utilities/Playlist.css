@@ -1,3 +1,6 @@
+.playlist-container{
+    display: flex;
+}
 .playlist-body{
     width: 90%;
     margin: 0 5%;

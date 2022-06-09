@@ -34,10 +34,11 @@ export const ActiveVideoCard = ({ item }) => {
         title: playlistName,
       },
     });
+    data.playlist.videos.push(item);
+    dispatch({ type: "GET_PLAYLISTS", payload: data.playlist });
   };
 
   let inLikedVideos = state.likedVideos.some((vid) => vid._id === item._id);
-  console.log(inLikedVideos);
 
   return (
     <div className="active-video-card-container">
@@ -118,6 +119,7 @@ export const ActiveVideoCard = ({ item }) => {
             position: "absolute",
             left: "-12rem",
             bottom: "1rem",
+            backgroundColor: "#fff",
           }}
         >
           <div className="duck-modal">
