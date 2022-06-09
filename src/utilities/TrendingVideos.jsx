@@ -68,7 +68,7 @@ export const TrendingVideos = () => {
             Home
           </Link>
           <Link
-            to="/trending"
+            to="/"
             className="landing-page-body-links duck-list-content-type-items"
           >
             <div className="duck-link-avatar-polygon-type">

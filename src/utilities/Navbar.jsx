@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuthProvider } from "./authProvider";
 import "./Navbar.css";
 export const Navbar = () => {
   const { state, dispatch } = useAuthProvider();
+  const navigate = useNavigate();
   return (
     <div className="duck-navbar-container">
       <Link className="duck-navbar-item duck-nav-brand" to="/">
@@ -10,11 +11,12 @@ export const Navbar = () => {
       </Link>
       {state.isLogin ? (
         <Link
-          to="/landing-page"
+          to="/login"
           className="duck-navbar-item"
           onClick={() => {
             dispatch({ type: "LOGIN_STATUS", payload: false });
             localStorage.removeItem("encodedToken");
+            navigate("/login");
           }}
         >
           Logout

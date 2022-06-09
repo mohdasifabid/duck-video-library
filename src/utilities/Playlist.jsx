@@ -4,13 +4,12 @@ import { useEffect } from "react";
 import { useVideo } from "../useVideo";
 import { Navbar } from "./Navbar";
 import "./Playlist.css";
-// import { VideoCard } from "./VideoCard";
 
 export const Playlist = () => {
   const { state, dispatch } = useVideo();
 
   useEffect(() => {
-    const getPlaylistVideos = async () => {
+    const getPlaylist = async () => {
       const token = localStorage.getItem("encodedToken");
       const response = await axios.get("/api/user/playlists", {
         headers: {
@@ -21,7 +20,7 @@ export const Playlist = () => {
         dispatch({ type: "GET_PLAYLISTS", payload: response.data.playlists });
       }
     };
-    getPlaylistVideos();
+    getPlaylist();
   }, []);
 
   return (

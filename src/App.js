@@ -61,7 +61,8 @@ function App() {
           <Route path="/liked" element={<LikedVideos/>}/>
         </Route>
         {
-          authState.isLogin ? <Route path="/login" element={<LandingPage/>}/> : <Route path="/login" element={<Login />}/>
+          authState.isLogin ? <Route path="/login" element={<TrendingVideos/>}/> :
+           <Route path="/login" element={<Login />}/>
         }
         
         <Route path="/signup" element={<Signup />}/>

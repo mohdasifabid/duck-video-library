@@ -20,7 +20,7 @@ export const Login = () => {
     if (response.status === 200) {
       dispatch({ type: "LOGIN_STATUS", payload: true });
       localStorage.setItem("encodedToken", response.data.encodedToken);
-      navigate("/trending");
+      navigate("/");
     }
   };
   return (
