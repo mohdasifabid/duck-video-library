@@ -4,27 +4,17 @@ import { ActiveVideoCard } from "./ActiveVideoCard";
 import { Navbar } from "./Navbar";
 import { VideoCard } from "./VideoCard";
 import "./VideoPage.css";
-import axios from "axios";
 import { useState } from "react";
 import { useVideo } from "../useVideo";
+import { getCall } from "./reusableFunctions";
 
 export const VideoPage = () => {
   const [video, setVideo] = useState({});
   const { state } = useVideo();
   const { id } = useParams();
-  useEffect(() => {
-    const getVideo = async (id) => {
-      const token = localStorage.getItem("encodedToken");
-      const response = await axios.get(`/api/video/${id}`, {
-        headers: {
-          authorization: token,
-        },
-      });
-      if (response.status === 200) {
-        setVideo(response.data.video);
-      }
-    };
-    getVideo(id);
+  useEffect(async () => {
+    const data = await getCall(`/api/video/${id}`);
+    setVideo(data.video);
   }, [id]);
 
   const excludePlayingVideoFromVideos = state.videos.filter(
