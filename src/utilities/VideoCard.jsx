@@ -32,8 +32,6 @@ export const VideoCard = ({ item, type }) => {
           Watch Now
         </button>
       </Link>
-
-      <i className="video-card-like-icon fa-solid fa-heart"></i>
     </div>
   );
 };

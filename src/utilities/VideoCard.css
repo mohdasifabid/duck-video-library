@@ -15,19 +15,9 @@
   margin: 0.25rem 0 0 0.25rem;
 }
 .video-card-sub-title {
-  margin: 0 0 0.25rem 0.25rem;
+  margin: 0 0 .25rem .25rem;
 }
-.video-card-like-icon {
-  position: absolute;
-  font-size: larger;
-  color: var(--secondary-color);
-  top: 0.7rem;
-  right: 1rem;
-  cursor: pointer;
-}
-.video-card-like-icon:hover {
-  color: white;
-}
+
 .video-card-container p {
   font-size: x-small;
 }
