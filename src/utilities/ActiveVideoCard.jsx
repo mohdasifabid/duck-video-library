@@ -14,7 +14,6 @@ export const ActiveVideoCard = ({ item }) => {
     });
     dispatch({ type: "GET_LIKED_VIDEOS", payload: data.likes });
   };
-
   const deleteDislikedVideo = async (dislikedVideo) => {
     const data = await deleteCall(`/api/user/likes/${dislikedVideo._id}`);
     dispatch({ type: "GET_LIKED_VIDEOS", payload: data.likes });
