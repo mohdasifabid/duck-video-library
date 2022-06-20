@@ -14,14 +14,15 @@ export const VideoCard = ({ item, type }) => {
 
   return (
     <div className="video-card-container">
-      <iframe
+      {/* <iframe
         className="video-card-media"
         src={`https://youtube.com/embed/${item.vLink}`}
         frameBorder="0"
         allow="autoplay; encrypted-media"
         allowFullScreen
         title="video"
-      />
+      /> */}
+      <img src={item.thumbnail_url} alt="" />
       <p className="video-card-title">
         <strong>{item.title}</strong>
       </p>
