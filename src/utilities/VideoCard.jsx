@@ -22,7 +22,7 @@ export const VideoCard = ({ item, type }) => {
         allowFullScreen
         title="video"
       /> */}
-      <img src={item.thumbnail_url} alt="" />
+      <img className="video-card-media" src={item.thumbnail_url} alt="" />
       <p className="video-card-title">
         <strong>{item.title}</strong>
       </p>
