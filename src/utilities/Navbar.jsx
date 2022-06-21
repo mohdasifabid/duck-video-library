@@ -11,8 +11,7 @@ export const Navbar = () => {
         MyBrand
       </Link>
       {state.isLogin ? (
-        <Link
-          to="/login"
+        <span
           className="duck-navbar-item"
           onClick={() => {
             dispatch({ type: getLoginStatus, payload: false });
@@ -20,12 +19,18 @@ export const Navbar = () => {
             navigate("/login");
           }}
         >
-          Logout
-        </Link>
+          <i className="fa-solid fa-user"></i>
+          <span className="current-user-name-container">
+            {state.currentUser.firstName + " " + state.currentUser.lastName}
+          </span>
+        </span>
       ) : (
-        <Link to="/login" className="duck-navbar-item">
-          Login
-        </Link>
+        <span
+          className="duck-navbar-item user-icon-container"
+          onClick={() => navigate("/login")}
+        >
+          <i className="fa-regular fa-user"></i>
+        </span>
       )}
     </div>
   );

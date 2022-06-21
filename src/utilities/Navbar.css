@@ -13,3 +13,11 @@
     z-index: 1000;
 
 }
+
+.user-icon-container{
+    cursor: pointer;
+}
+.current-user-name-container{
+font-weight: 400;
+padding-left: .5rem;
+}
