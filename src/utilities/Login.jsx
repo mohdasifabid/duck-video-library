@@ -2,11 +2,11 @@ import "./Login.css";
 import { useState } from "react";
 import { postCall } from "./reusableFunctions";
 import { useAuthProvider } from "./authProvider";
-import { getLoginStatus } from "../authActionTypes";
-import { Link, useNavigate } from "react-router-dom";
+import { getCurrentUser, getLoginStatus } from "../authActionTypes";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
-  const { dispatch } = useAuthProvider();
+  const { dispatch: authDispatch } = useAuthProvider();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ export const Login = () => {
       email: email,
       password: password,
     });
-    dispatch({ type: getLoginStatus, payload: true });
+    authDispatch({ type: getLoginStatus, payload: true });
     localStorage.setItem("encodedToken", data.encodedToken);
     navigate("/");
   };
@@ -25,9 +25,10 @@ export const Login = () => {
       email: "ducktube@gmail.com",
       password: "duckTube123",
     });
-    dispatch({ type: getLoginStatus, payload: true });
+    authDispatch({ type: getLoginStatus, payload: true });
     localStorage.setItem("encodedToken", data.encodedToken);
     navigate("/");
+    authDispatch({ type: getCurrentUser, payload: data.foundUser });
   };
   return (
     <div className="login-page-body-content">
