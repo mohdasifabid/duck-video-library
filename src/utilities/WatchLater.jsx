@@ -2,18 +2,20 @@ import { useEffect } from "react";
 import { useVideo } from "../useVideo";
 import { deleteCall, getCall } from "./reusableFunctions";
 import "./WatchLater.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Layout } from "./Layout";
+import { getWatchLaterVideos } from "./videoActionTypes";
+
 export const WatchLater = () => {
   const { state, dispatch } = useVideo();
   const navigate = useNavigate();
   useEffect(async () => {
     const data = await getCall("/api/user/watchlater");
-    dispatch({ type: "GET_WATCH_LATER_VIDEOS", payload: data.watchlater });
+    dispatch({ type: getWatchLaterVideos, payload: data.watchlater });
   }, []);
   const deleteWatchedlaterVideoHandler = async (id) => {
     const data = await deleteCall(`/api/user/watchlater/${id}`);
-    dispatch({ type: "GET_WATCH_LATER_VIDEOS", payload: data.watchlater });
+    dispatch({ type: getWatchLaterVideos, payload: data.watchlater });
   };
 
   return (

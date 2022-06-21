@@ -1,15 +1,16 @@
-import { Link } from "react-router-dom";
+import "./Playlist.css";
+import { Layout } from "./Layout";
 import { useEffect } from "react";
 import { useVideo } from "../useVideo";
-import "./Playlist.css";
+import { Link } from "react-router-dom";
 import { getCall } from "./reusableFunctions";
-import { Layout } from "./Layout";
+import { getPlaylists } from "./videoActionTypes";
 
 export const Playlist = () => {
   const { state, dispatch } = useVideo();
   useEffect(async () => {
     const data = await getCall("/api/user/playlists");
-    dispatch({ type: "GET_PLAYLISTS", payload: data.playlists });
+    dispatch({ type: getPlaylists, payload: data.playlists });
   }, []);
 
   return (

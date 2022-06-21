@@ -1,7 +1,12 @@
-import { useEffect, useState } from "react";
-import { useVideo } from "../useVideo";
 import "./ActiveVideoCard.css";
+import { useVideo } from "../useVideo";
+import { useEffect, useState } from "react";
 import { deleteCall, getCall, postCall } from "./reusableFunctions";
+import {
+  getLikedVideos,
+  getPlaylists,
+  getWatchLaterVideos,
+} from "./videoActionTypes";
 
 export const ActiveVideoCard = ({ item }) => {
   const { state, dispatch } = useVideo();
@@ -11,18 +16,18 @@ export const ActiveVideoCard = ({ item }) => {
 
   useEffect(async () => {
     const data = await getCall(`/api/user/playlists`);
-    dispatch({ type: "GET_PLAYLISTS", payload: data.playlists });
+    dispatch({ type: getPlaylists, payload: data.playlists });
   }, []);
 
   const postLikedVideo = async (likedVideo) => {
     const data = await postCall("/api/user/likes", {
       video: likedVideo,
     });
-    dispatch({ type: "GET_LIKED_VIDEOS", payload: data.likes });
+    dispatch({ type: getLikedVideos, payload: data.likes });
   };
   const deleteDislikedVideo = async (dislikedVideo) => {
     const data = await deleteCall(`/api/user/likes/${dislikedVideo._id}`);
-    dispatch({ type: "GET_LIKED_VIDEOS", payload: data.likes });
+    dispatch({ type: getLikedVideos, payload: data.likes });
   };
 
   const postPlaylist = async (item) => {
@@ -48,12 +53,12 @@ export const ActiveVideoCard = ({ item }) => {
     const data = await postCall("/api/user/watchlater", {
       video: watchlaterVideo,
     });
-    dispatch({ type: "GET_WATCH_LATER_VIDEOS", payload: data.watchlater });
+    dispatch({ type: getWatchLaterVideos, payload: data.watchlater });
   };
 
   const deleteFromWatchLaterHandler = async (id) => {
     const data = await deleteCall(`/api/user/watchlater/${id}`);
-    dispatch({ type: "GET_WATCH_LATER_VIDEOS", payload: data.watchlater });
+    dispatch({ type: getWatchLaterVideos, payload: data.watchlater });
   };
 
   const inLikedVideos = state.likedVideos.some((vid) => vid._id === item._id);

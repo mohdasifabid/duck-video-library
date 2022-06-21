@@ -5,6 +5,7 @@ import { useVideo } from "../useVideo";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getCall } from "./reusableFunctions";
+import { getCategories, getVideos } from "./videoActionTypes";
 
 export const TrendingVideos = () => {
   const { state, dispatch } = useVideo();
@@ -12,9 +13,9 @@ export const TrendingVideos = () => {
 
   useEffect(async () => {
     const data = await getCall("/api/categories");
-    dispatch({ type: "GET_CATEGORIES", payload: data.categories });
+    dispatch({ type: getCategories, payload: data.categories });
     const videoData = await getCall("api/videos");
-    dispatch({ type: "GET_VIDEOS", payload: videoData.videos });
+    dispatch({ type: getVideos, payload: videoData.videos });
   }, []);
 
   const filterCategory = (data, checker) => {

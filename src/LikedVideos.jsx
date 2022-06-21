@@ -1,15 +1,17 @@
 import axios from "axios";
 import { useEffect } from "react";
-import { useVideo } from "./useVideo";
 import "./utilities/WatchLater.css";
+import { useVideo } from "./useVideo";
+import { Layout } from "./utilities/Layout";
 import { useNavigate } from "react-router-dom";
 import { deleteCall } from "./utilities/reusableFunctions";
-import { Layout } from "./utilities/Layout";
+import { getLikedVideos } from "./utilities/videoActionTypes";
+
 export const LikedVideos = () => {
   const { state, dispatch } = useVideo();
   const navigate = useNavigate();
   useEffect(() => {
-    const getLikedVideos = async () => {
+    const getLikedVideosHandler = async () => {
       const token = localStorage.getItem("encodedToken");
       const response = await axios.get("/api/user/likes", {
         headers: {
@@ -17,14 +19,15 @@ export const LikedVideos = () => {
         },
       });
       if (response.status === 200) {
-        dispatch({ type: "GET_LIKED_VIDEOS", payload: response.data.likes });
+        dispatch({ type: getLikedVideos, payload: response.data.likes });
       }
     };
-    getLikedVideos();
+    getLikedVideosHandler();
   }, []);
+
   const deleteLikedVideoHandler = async (id) => {
     const data = await deleteCall(`/api/user/likes/${id}`);
-    dispatch({ type: "GET_LIKED_VIDEOS", payload: data.likes });
+    dispatch({ type: getLikedVideos, payload: data.likes });
   };
   return (
     <Layout>

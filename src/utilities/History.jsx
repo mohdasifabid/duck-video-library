@@ -1,9 +1,10 @@
 import "./History.css";
+import { Layout } from "./Layout";
 import { useEffect } from "react";
 import { useVideo } from "../useVideo";
 import { useNavigate } from "react-router-dom";
+import { getHistory } from "./videoActionTypes";
 import { deleteCall, getCall } from "./reusableFunctions";
-import { Layout } from "./Layout";
 
 export const History = () => {
   const { state, dispatch } = useVideo();
@@ -11,16 +12,16 @@ export const History = () => {
 
   useEffect(async () => {
     const data = await getCall("/api/user/history");
-    dispatch({ type: "GET_HISTORY", payload: data.history });
+    dispatch({ type: getHistory, payload: data.history });
   }, []);
 
   const deleteHistory = async () => {
     const data = await deleteCall("/api/user/history/all");
-    dispatch({ type: "GET_HISTORY", payload: data.history });
+    dispatch({ type: getHistory, payload: data.history });
   };
   const deleteVideoFromHistory = async (id) => {
     const data = await deleteCall(`/api/user/history/${id}`);
-    dispatch({ type: "GET_HISTORY", payload: data.history });
+    dispatch({ type: getHistory, payload: data.history });
   };
 
   return (
