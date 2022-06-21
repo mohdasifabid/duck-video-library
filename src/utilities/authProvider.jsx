@@ -1,15 +1,17 @@
 import { createContext, useContext, useReducer } from "react";
+import { getLoginStatus, getSignUpStatus } from "../authActionTypes";
+
 const AuthContext = createContext();
 const useAuthProvider = () => useContext(AuthContext);
 
 const authReducer = (state, action) => {
   switch (action.type) {
-    case "LOGIN_STATUS":
+    case getLoginStatus:
       return {
         ...state,
         isLogin: action.payload,
       };
-    case "SIGN_UP_STATUS":
+    case getSignUpStatus:
       return {
         ...state,
         isSignup: action.payload,
