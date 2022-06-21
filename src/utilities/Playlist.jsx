@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useVideo } from "../useVideo";
 import { Link } from "react-router-dom";
 import { getCall } from "./reusableFunctions";
-import { getPlaylists } from "./videoActionTypes";
+import { getPlaylists } from "../videoActionTypes";
 
 export const Playlist = () => {
   const { state, dispatch } = useVideo();

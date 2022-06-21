@@ -3,7 +3,7 @@ import { Layout } from "./Layout";
 import { useEffect } from "react";
 import { useVideo } from "../useVideo";
 import { useNavigate } from "react-router-dom";
-import { getHistory } from "./videoActionTypes";
+import { getHistory } from "../videoActionTypes";
 import { deleteCall, getCall } from "./reusableFunctions";
 
 export const History = () => {

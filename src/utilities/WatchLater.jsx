@@ -4,7 +4,7 @@ import { deleteCall, getCall } from "./reusableFunctions";
 import "./WatchLater.css";
 import { useNavigate } from "react-router-dom";
 import { Layout } from "./Layout";
-import { getWatchLaterVideos } from "./videoActionTypes";
+import { getWatchLaterVideos } from "../videoActionTypes";
 
 export const WatchLater = () => {
   const { state, dispatch } = useVideo();

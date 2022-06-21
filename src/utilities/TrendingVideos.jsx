@@ -5,7 +5,7 @@ import { useVideo } from "../useVideo";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getCall } from "./reusableFunctions";
-import { getCategories, getVideos } from "./videoActionTypes";
+import { getCategories, getVideos } from "../videoActionTypes";
 
 export const TrendingVideos = () => {
   const { state, dispatch } = useVideo();

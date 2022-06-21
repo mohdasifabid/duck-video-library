@@ -1,7 +1,7 @@
 import "./VideoCard.css";
 import { useVideo } from "../useVideo";
 import { postCall } from "./reusableFunctions";
-import { getHistory } from "./videoActionTypes";
+import { getHistory } from "../videoActionTypes";
 import { useNavigate } from "react-router-dom";
 
 export const VideoCard = ({ item, type }) => {

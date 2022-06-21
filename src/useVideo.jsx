@@ -6,7 +6,7 @@ import {
   getPlaylists,
   getHistory,
   getLikedVideos,
-} from "./utilities/videoActionTypes";
+} from "./videoActionTypes";
 
 const VideoContext = createContext();
 const useVideo = () => useContext(VideoContext);

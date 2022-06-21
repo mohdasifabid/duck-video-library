@@ -6,7 +6,7 @@ import {
   getLikedVideos,
   getPlaylists,
   getWatchLaterVideos,
-} from "./videoActionTypes";
+} from "../videoActionTypes";
 
 export const ActiveVideoCard = ({ item }) => {
   const { state, dispatch } = useVideo();

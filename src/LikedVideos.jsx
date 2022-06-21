@@ -5,7 +5,7 @@ import { useVideo } from "./useVideo";
 import { Layout } from "./utilities/Layout";
 import { useNavigate } from "react-router-dom";
 import { deleteCall } from "./utilities/reusableFunctions";
-import { getLikedVideos } from "./utilities/videoActionTypes";
+import { getLikedVideos } from "./videoActionTypes";
 
 export const LikedVideos = () => {
   const { state, dispatch } = useVideo();
