@@ -44,9 +44,15 @@ export const Login = () => {
           placeholder="enter your password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button className="loginBtn" onClick={saveEmailPassword}>
-          Login
-        </button>
+        {email.length > 1 && password.length > 1 ? (
+          <button className="loginBtn" onClick={saveEmailPassword}>
+            Login
+          </button>
+        ) : (
+          <button className="loginBtn" onClick={saveEmailPassword} disabled>
+            Login
+          </button>
+        )}
         <button onClick={guestLoginHandler}>Login as Guest</button>
         <p>
           Not a user?

@@ -54,18 +54,27 @@ export const Signup = () => {
           placeholder="enter your password again"
           onChange={(e) => setConfirmedPassword(e.target.value)}
         />
-        <button
-          onClick={() => {
-            saveNewUserInfo();
-            if (name !== "" && email !== "" && password !== "") {
-              navigate("/");
-            } else {
-              alert("Please, complete the signup process!");
-            }
-          }}
-        >
-          Signup
-        </button>
+        {name.length > 1 ||
+        email.length > 1 ||
+        password.length > 1 ||
+        confirmedPassword.length > 1 ? (
+          <button
+            onClick={() => {
+              saveNewUserInfo();
+            }}
+          >
+            Signup
+          </button>
+        ) : (
+          <button
+            disabled
+            onClick={() => {
+              saveNewUserInfo();
+            }}
+          >
+            Signup
+          </button>
+        )}
         <p>
           Already a user?
           <a href="" onClick={() => navigate("/login")}>
