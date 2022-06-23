@@ -20,7 +20,7 @@ export const WatchLater = () => {
 
   return (
     <Layout>
-      <h1>Watch Later</h1>
+      <h2>Watch Later</h2>
       <div className="watch-later-videos-container">
         <div>
           {state.watchlaterVideos.map((watchLaterVid) => {

@@ -22,7 +22,6 @@ export const Playlist = () => {
     <Layout>
       <div className="playlist-heading-clear-btn-container">
         <h2>Playlist</h2>
-        <button className=" playlist-clear-btn ">Clear Playlist</button>
       </div>
       {state.playlist.map((item) => {
         return (

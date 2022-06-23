@@ -27,11 +27,8 @@ export const History = () => {
   return (
     <Layout>
       <div className="history-videos-heading-clear-btn-container">
-        <h1>History</h1>
-        <button
-          className=" history-videos-clear-btn duck-primary-btn-s duck-primary-btn"
-          onClick={deleteHistory}
-        >
+        <h2>History</h2>
+        <button className=" history-videos-clear-btn " onClick={deleteHistory}>
           Clear History
         </button>
       </div>

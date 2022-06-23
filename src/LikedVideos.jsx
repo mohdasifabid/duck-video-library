@@ -31,7 +31,7 @@ export const LikedVideos = () => {
   };
   return (
     <Layout>
-      <h1>Liked videos</h1>
+      <h2>Liked videos</h2>
       <div className="watch-later-videos-container">
         {state.likedVideos.length > 0 && (
           <div>
