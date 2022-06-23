@@ -1,9 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
-import {
-  getCurrentUser,
-  getLoginStatus,
-  getSignUpStatus,
-} from "../authActionTypes";
+import { getLoginStatus, getSignUpStatus } from "../authActionTypes";
 
 const AuthContext = createContext();
 const useAuthProvider = () => useContext(AuthContext);
@@ -20,11 +16,6 @@ const authReducer = (state, action) => {
         ...state,
         isSignup: action.payload,
       };
-    case getCurrentUser:
-      return {
-        ...state,
-        currentUser: action.payload,
-      };
 
     default:
       return state;
@@ -33,7 +24,6 @@ const authReducer = (state, action) => {
 const initialState = {
   isLogin: false,
   isSignup: false,
-  currentUser: {},
 };
 const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);

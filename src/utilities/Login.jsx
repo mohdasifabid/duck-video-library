@@ -2,7 +2,7 @@ import "./Login.css";
 import { useState } from "react";
 import { postCall } from "./reusableFunctions";
 import { useAuthProvider } from "./authProvider";
-import { getCurrentUser, getLoginStatus } from "../authActionTypes";
+import { getLoginStatus } from "../authActionTypes";
 import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
@@ -18,6 +18,7 @@ export const Login = () => {
     });
     authDispatch({ type: getLoginStatus, payload: true });
     localStorage.setItem("encodedToken", data.encodedToken);
+    localStorage.setItem("currentUser", JSON.stringify(data.foundUser));
     navigate("/");
   };
   const guestLoginHandler = async () => {
@@ -27,8 +28,8 @@ export const Login = () => {
     });
     authDispatch({ type: getLoginStatus, payload: true });
     localStorage.setItem("encodedToken", data.encodedToken);
+    localStorage.setItem("currentUser", JSON.stringify(data.foundUser));
     navigate("/");
-    authDispatch({ type: getCurrentUser, payload: data.foundUser });
   };
   return (
     <div className="login-page-body-content">

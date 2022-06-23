@@ -2,9 +2,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { getLoginStatus } from "../authActionTypes";
 import { useAuthProvider } from "./authProvider";
 import "./Navbar.css";
+
 export const Navbar = () => {
   const { state, dispatch } = useAuthProvider();
   const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("currentUser"));
+
   return (
     <div className="duck-navbar-container">
       <Link className="duck-navbar-item duck-nav-brand" to="/">
@@ -21,7 +24,7 @@ export const Navbar = () => {
         >
           <i className="fa-solid fa-user"></i>
           <span className="current-user-name-container">
-            {state.currentUser.firstName + " " + state.currentUser.lastName}
+            {user.firstName + " " + user.lastName}
           </span>
         </span>
       ) : (

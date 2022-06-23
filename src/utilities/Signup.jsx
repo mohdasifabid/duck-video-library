@@ -15,7 +15,8 @@ export const Signup = () => {
 
   const saveNewUserInfo = async () => {
     const response = await axios.post("/api/auth/signup", {
-      name: name,
+      firstName: name,
+      lastName: "",
       email: email,
       password: password,
       confirmedPassword: confirmedPassword,
@@ -25,6 +26,7 @@ export const Signup = () => {
     } else {
       dispatch({ type: getSignUpStatus, payload: true });
     }
+    navigate("/login");
   };
 
   return (
