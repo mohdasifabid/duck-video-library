@@ -82,20 +82,6 @@ export const ActiveVideoCard = ({ item }) => {
       >
         <div className="activ-video-card-icons-container">
           {inLikedVideos ? (
-            <span className="active-video-card-icons-and-tags">
-              <i className="fa-solid fa-thumbs-up"></i>
-            </span>
-          ) : (
-            <span
-              className="active-video-card-icons-and-tags"
-              onClick={() => {
-                postLikedVideo(item);
-              }}
-            >
-              <i className="fa-regular fa-thumbs-up"></i>
-            </span>
-          )}
-          {inLikedVideos ? (
             <span
               className="active-video-card-icons-and-tags"
               onClick={() => {
@@ -105,8 +91,13 @@ export const ActiveVideoCard = ({ item }) => {
               <i className="fa-regular fa-thumbs-down"></i>
             </span>
           ) : (
-            <span className="active-video-card-icons-and-tags">
-              <i className="fa-solid fa-thumbs-down"></i>
+            <span
+              className="active-video-card-icons-and-tags"
+              onClick={() => {
+                postLikedVideo(item);
+              }}
+            >
+              <i className="fa-regular fa-thumbs-up"></i>
             </span>
           )}
           {/* watchlater section */}
