@@ -4,6 +4,7 @@
     justify-content: space-between;
     align-items: center;
     padding: .5rem 1rem;
+    width: fit-content;
 }
 .list li{
     margin-right: 3rem;
@@ -23,4 +24,9 @@
     .mobile-navigation{
         display: none;
     }
+}
+
+.child-container{
+    width: 90%;
+    margin: 0 5%;
 }

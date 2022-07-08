@@ -1,46 +1,66 @@
-import { useState } from "react";
-import { useVideo } from "../useVideo";
 import "./ActiveVideoCard.css";
-import { deleteCall, postCall } from "./reusableFunctions";
+import { useVideo } from "../useVideo";
+import { useEffect, useState } from "react";
+import { deleteCall, getCall, postCall } from "./reusableFunctions";
+import {
+  getLikedVideos,
+  getPlaylists,
+  getWatchLaterVideos,
+} from "../videoActionTypes";
 
 export const ActiveVideoCard = ({ item }) => {
   const { state, dispatch } = useVideo();
   const [creatingPlaylist, setCreatingPlaylist] = useState(false);
   const [playlistName, setPlaylistName] = useState("");
+  const [selectedPlaylist, setSelectedPlaylist] = useState({});
+
+  useEffect(async () => {
+    const data = await getCall(`/api/user/playlists`);
+    dispatch({ type: getPlaylists, payload: data.playlists });
+  }, []);
 
   const postLikedVideo = async (likedVideo) => {
     const data = await postCall("/api/user/likes", {
       video: likedVideo,
     });
-    dispatch({ type: "GET_LIKED_VIDEOS", payload: data.likes });
+    dispatch({ type: getLikedVideos, payload: data.likes });
   };
-
   const deleteDislikedVideo = async (dislikedVideo) => {
     const data = await deleteCall(`/api/user/likes/${dislikedVideo._id}`);
-    dispatch({ type: "GET_LIKED_VIDEOS", payload: data.likes });
+    dispatch({ type: getLikedVideos, payload: data.likes });
   };
 
-  const postPlaylist = async () => {
-    const data = await postCall("/api/user/playlists", {
+  const postPlaylist = async (item) => {
+    const data = await postCall(`/api/user/playlists`, {
       playlist: {
         title: playlistName,
       },
     });
-    data.playlist.videos.push(item);
-    dispatch({ type: "GET_PLAYLISTS", payload: data.playlist });
+
+    const foundPlaylist = data.playlists.find(
+      (plist) => plist.title === playlistName
+    );
+
+    const videoData = await postCall(
+      `/api/user/playlists/${foundPlaylist._id}`,
+      {
+        video: item,
+      }
+    );
   };
 
   const postWatchlaterVideo = async (watchlaterVideo) => {
     const data = await postCall("/api/user/watchlater", {
       video: watchlaterVideo,
     });
-    dispatch({ type: "GET_WATCH_LATER_VIDEOS", payload: data.watchlater });
+    dispatch({ type: getWatchLaterVideos, payload: data.watchlater });
   };
 
   const deleteFromWatchLaterHandler = async (id) => {
     const data = await deleteCall(`/api/user/watchlater/${id}`);
-    dispatch({ type: "GET_WATCH_LATER_VIDEOS", payload: data.watchlater });
+    dispatch({ type: getWatchLaterVideos, payload: data.watchlater });
   };
+
   const inLikedVideos = state.likedVideos.some((vid) => vid._id === item._id);
   const inWatchlaterVideos = state.watchlaterVideos.some(
     (vid) => vid._id === item._id
@@ -62,20 +82,6 @@ export const ActiveVideoCard = ({ item }) => {
       >
         <div className="activ-video-card-icons-container">
           {inLikedVideos ? (
-            <span className="active-video-card-icons-and-tags">
-              <i className="fa-solid fa-thumbs-up"></i>
-            </span>
-          ) : (
-            <span
-              className="active-video-card-icons-and-tags"
-              onClick={() => {
-                postLikedVideo(item);
-              }}
-            >
-              <i className="fa-regular fa-thumbs-up"></i>
-            </span>
-          )}
-          {inLikedVideos ? (
             <span
               className="active-video-card-icons-and-tags"
               onClick={() => {
@@ -85,8 +91,13 @@ export const ActiveVideoCard = ({ item }) => {
               <i className="fa-regular fa-thumbs-down"></i>
             </span>
           ) : (
-            <span className="active-video-card-icons-and-tags">
-              <i className="fa-solid fa-thumbs-down"></i>
+            <span
+              className="active-video-card-icons-and-tags"
+              onClick={() => {
+                postLikedVideo(item);
+              }}
+            >
+              <i className="fa-regular fa-thumbs-up"></i>
             </span>
           )}
           {/* watchlater section */}
@@ -131,6 +142,7 @@ export const ActiveVideoCard = ({ item }) => {
           {item.description}
         </p>
       </div>
+      {/* creating playlist */}
       {creatingPlaylist ? (
         <div
           className="duck-modal-container"
@@ -144,14 +156,26 @@ export const ActiveVideoCard = ({ item }) => {
           <div className="duck-modal">
             {state.playlist.length > 0
               ? state.playlist.map((playlist) => {
-                  return <li>{playlist.title}</li>;
+                  console.log(playlist);
+                  return (
+                    <a
+                      key={playlist._id}
+                      value={playlist._id}
+                      onClick={() => {
+                        setSelectedPlaylist(playlist);
+                        setPlaylistName(playlist.title);
+                      }}
+                    >
+                      {playlist.title}
+                    </a>
+                  );
                 })
               : null}
 
             <label htmlFor="email" className="duck-modal-email-label">
               Create playlist
               <input
-                value={playlistName}
+                value={selectedPlaylist.title}
                 type="text"
                 className="duck-modal-email-input"
                 placeholder="create new playlist"
@@ -162,7 +186,7 @@ export const ActiveVideoCard = ({ item }) => {
               className="duck-modal-button"
               onClick={() => {
                 setCreatingPlaylist(false);
-                postPlaylist();
+                postPlaylist(item);
                 setPlaylistName("");
               }}
             >

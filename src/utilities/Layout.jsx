@@ -1,38 +1,7 @@
-import "./TrendingVideos.css";
 import { Navbar } from "./Navbar";
-import { VideoCard } from "./VideoCard";
-import { useVideo } from "../useVideo";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { getCall } from "./reusableFunctions";
-import { getCategories, getVideos } from "../videoActionTypes";
 
-export const TrendingVideos = () => {
-  const { state, dispatch } = useVideo();
-  const [categoryChecker, setCategoryCheck] = useState("");
-
-  useEffect(async () => {
-    const data = await getCall("/api/categories");
-    dispatch({ type: getCategories, payload: data.categories });
-    const videoData = await getCall("api/videos");
-    dispatch({ type: getVideos, payload: videoData.videos });
-  }, []);
-
-  const filterCategory = (data, checker) => {
-    let newData = data;
-    if (checker === "all") {
-      newData = data;
-    }
-    if (checker === "music") {
-      newData = data.filter((vid) => vid.category === checker);
-    }
-    if (checker === "tech") {
-      newData = data.filter((vid) => vid.category === checker);
-    }
-    return newData;
-  };
-
-  const updatedData = filterCategory(state.videos, categoryChecker);
+export const Layout = ({ children }) => {
   return (
     <div>
       <Navbar />
@@ -78,20 +47,7 @@ export const TrendingVideos = () => {
           </div>
         </Link>
       </ol>
-      <div className="category-container">
-        {state.categories.map((cat) => {
-          return (
-            <button
-              className="category-box"
-              onClick={() => setCategoryCheck(cat.categoryName)}
-              key={cat._id}
-            >
-              {cat.categoryName}
-            </button>
-          );
-        })}
-      </div>
-      <div className="landing-page-body-container trending-page-body">
+      <div className="common-container">
         <ol className="duck-list-content-type">
           <Link
             to="/"
@@ -139,13 +95,7 @@ export const TrendingVideos = () => {
             History
           </Link>
         </ol>
-        <div className="trending-videos-body">
-          <div className="trending-videos-card-container">
-            {updatedData.map((item) => {
-              return <VideoCard item={item} key={item._id} />;
-            })}
-          </div>
-        </div>
+        <div className="child-container">{children}</div>
       </div>
     </div>
   );

@@ -30,12 +30,6 @@ export const Aplaylist = ({ item }) => {
     <div>
       <Navbar />
       <div className="playlist-body">
-        <div className="playlist-heading-clear-btn-container">
-          <h1>Ek thi playlist</h1>
-          <button className=" playlist-clear-btn duck-primary-btn-s duck-primary-btn">
-            Clear Playlist
-          </button>
-        </div>
         <div className="playlist-body-content">
           {playlistData.map((item) => {
             return (

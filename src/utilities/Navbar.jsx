@@ -1,30 +1,39 @@
 import { Link, useNavigate } from "react-router-dom";
+import { getLoginStatus } from "../authActionTypes";
 import { useAuthProvider } from "./authProvider";
 import "./Navbar.css";
+
 export const Navbar = () => {
   const { state, dispatch } = useAuthProvider();
   const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("currentUser"));
+
   return (
     <div className="duck-navbar-container">
       <Link className="duck-navbar-item duck-nav-brand" to="/">
         MyBrand
       </Link>
       {state.isLogin ? (
-        <Link
-          to="/login"
+        <span
           className="duck-navbar-item"
           onClick={() => {
-            dispatch({ type: "LOGIN_STATUS", payload: false });
+            dispatch({ type: getLoginStatus, payload: false });
             localStorage.removeItem("encodedToken");
             navigate("/login");
           }}
         >
-          Logout
-        </Link>
+          <i className="fa-solid fa-user"></i>
+          <span className="current-user-name-container">
+            {user.firstName + " " + user.lastName}
+          </span>
+        </span>
       ) : (
-        <Link to="/login" className="duck-navbar-item">
-          Login
-        </Link>
+        <span
+          className="duck-navbar-item user-icon-container"
+          onClick={() => navigate("/login")}
+        >
+          <i className="fa-regular fa-user"></i>
+        </span>
       )}
     </div>
   );

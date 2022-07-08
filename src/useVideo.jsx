@@ -1,35 +1,44 @@
 import { createContext, useContext, useReducer } from "react";
+import {
+  getVideos,
+  getCategories,
+  getWatchLaterVideos,
+  getPlaylists,
+  getHistory,
+  getLikedVideos,
+} from "./videoActionTypes";
+
 const VideoContext = createContext();
 const useVideo = () => useContext(VideoContext);
 
 const videoReducer = (state, action) => {
   switch (action.type) {
-    case "GET_VIDEOS":
+    case getVideos:
       return {
         ...state,
         videos: action.payload,
       };
-    case "GET_CATEGORIES":
+    case getCategories:
       return {
         ...state,
         categories: action.payload,
       };
-    case "GET_LIKED_VIDEOS":
+    case getLikedVideos:
       return {
         ...state,
         likedVideos: action.payload,
       };
-    case "GET_WATCH_LATER_VIDEOS":
+    case getWatchLaterVideos:
       return {
         ...state,
         watchlaterVideos: action.payload,
       };
-    case "GET_PLAYLISTS":
+    case getPlaylists:
       return {
         ...state,
         playlist: action.payload,
       };
-    case "GET_HISTORY":
+    case getHistory:
       return {
         ...state,
         history: action.payload,
@@ -39,7 +48,6 @@ const videoReducer = (state, action) => {
       state;
   }
 };
-
 const initialState = {
   videos: [],
   categories: [],
