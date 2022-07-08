@@ -9,7 +9,7 @@ Duck Tube, a video library built using ReactJS, AJAX, React Router .
 * Netlify for Deployment
 
 ## How to run the app locally?
-`` $https://github.com/mdarif6/my-video-lib.git
+`` $https://github.com/mohdasifabid/duck-video-library.git
 $ cd my-video-lib
 $ npm install
 $ npm start
