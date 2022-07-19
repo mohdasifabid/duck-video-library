@@ -6,16 +6,21 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getCall } from "./reusableFunctions";
 import { getCategories, getVideos } from "../videoActionTypes";
+import { useDispatch, useSelector } from "react-redux";
+import { setVideos } from "../features.js/videoSlice";
 
 export const TrendingVideos = () => {
-  const { state, dispatch } = useVideo();
+  const { state, dispatch: contextDispatch } = useVideo();
   const [categoryChecker, setCategoryCheck] = useState("");
+  const dispatch = useDispatch()
+  const videosData = useSelector((state)=>state.videoState.videos)
 
   useEffect(async () => {
     const data = await getCall("/api/categories");
-    dispatch({ type: getCategories, payload: data.categories });
+    contextDispatch({ type: getCategories, payload: data.categories });
     const videoData = await getCall("api/videos");
-    dispatch({ type: getVideos, payload: videoData.videos });
+    // contextDispatch({ type: getVideos, payload: videoData.videos });
+    dispatch(setVideos(videoData.videos))
   }, []);
 
   const filterCategory = (data, checker) => {
@@ -31,8 +36,7 @@ export const TrendingVideos = () => {
     }
     return newData;
   };
-
-  const updatedData = filterCategory(state.videos, categoryChecker);
+  const updatedData = filterCategory(videosData, categoryChecker);
   return (
     <div>
       <Navbar />

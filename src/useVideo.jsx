@@ -49,7 +49,7 @@ const videoReducer = (state, action) => {
   }
 };
 const initialState = {
-  videos: [],
+  // videos: [],
   categories: [],
   likedVideos: [],
   watchlaterVideos: [],
