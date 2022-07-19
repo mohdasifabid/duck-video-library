@@ -2,33 +2,38 @@ import "./ActiveVideoCard.css";
 import { useEffect, useState } from "react";
 import { deleteCall, getCall, postCall } from "./reusableFunctions";
 
-import {useDispatch,useSelector} from "react-redux"
-import { setLikedVideos, setPlaylist, setWatchLater } from "../features.js/userActivitySlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setLikedVideos,
+  setPlaylist,
+  setWatchLater,
+} from "../features.js/userActivitySlice";
 
 export const ActiveVideoCard = ({ item }) => {
   const [creatingPlaylist, setCreatingPlaylist] = useState(false);
   const [playlistName, setPlaylistName] = useState("");
   const [selectedPlaylist, setSelectedPlaylist] = useState({});
-  const dispatch = useDispatch()
-  const likedVideos = useSelector(state=>state.activityState.likedVideos)
-  const watchlaterVideos = useSelector(state => state.activityState.watchLater)
+  const dispatch = useDispatch();
+  const likedVideos = useSelector((state) => state.activityState.likedVideos);
+  const watchlaterVideos = useSelector(
+    (state) => state.activityState.watchLater
+  );
   const playlist = useSelector((state) => state.activityState.playlist);
-
 
   useEffect(async () => {
     const data = await getCall(`/api/user/playlists`);
-    dispatch(setPlaylist(data.playlists))
+    dispatch(setPlaylist(data.playlists));
   }, []);
 
   const postLikedVideo = async (likedVideo) => {
     const data = await postCall("/api/user/likes", {
       video: likedVideo,
     });
-    dispatch(setLikedVideos(data.likes))
+    dispatch(setLikedVideos(data.likes));
   };
   const deleteDislikedVideo = async (dislikedVideo) => {
     const data = await deleteCall(`/api/user/likes/${dislikedVideo._id}`);
-    dispatch(setLikedVideos(data.likes))
+    dispatch(setLikedVideos(data.likes));
   };
 
   const postPlaylist = async (item) => {
@@ -53,13 +58,12 @@ export const ActiveVideoCard = ({ item }) => {
     const data = await postCall("/api/user/watchlater", {
       video: watchlaterVideo,
     });
-    dispatch(setWatchLater(data.watchlater))
+    dispatch(setWatchLater(data.watchlater));
   };
 
   const deleteFromWatchLaterHandler = async (id) => {
     const data = await deleteCall(`/api/user/watchlater/${id}`);
-    dispatch(setWatchLater(data.watchlater))
-
+    dispatch(setWatchLater(data.watchlater));
   };
 
   const inLikedVideos = likedVideos.some((vid) => vid._id === item._id);
@@ -157,23 +161,22 @@ export const ActiveVideoCard = ({ item }) => {
           <div className="duck-modal">
             {/* {state.playlist.length > 0 */}
 
-             {  playlist?.map((playlist) => {
-                  console.log(playlist);
-                  return (
-                    <a
-                      key={playlist._id}
-                      value={playlist._id}
-                      onClick={() => {
-                        setSelectedPlaylist(playlist);
-                        setPlaylistName(playlist.title);
-                      }}
-                    >
-                      {playlist.title}
-                    </a>
-                  );
-                })
-              }
-              {/* : null} */}
+            {playlist?.map((playlist) => {
+              console.log(playlist);
+              return (
+                <a
+                  key={playlist._id}
+                  value={playlist._id}
+                  onClick={() => {
+                    setSelectedPlaylist(playlist);
+                    setPlaylistName(playlist.title);
+                  }}
+                >
+                  {playlist.title}
+                </a>
+              );
+            })}
+            {/* : null} */}
 
             <label htmlFor="email" className="duck-modal-email-label">
               Create playlist

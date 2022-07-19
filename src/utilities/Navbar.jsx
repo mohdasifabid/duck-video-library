@@ -5,7 +5,6 @@ import { setAuthentication } from "../features.js/authSlice";
 
 export const Navbar = () => {
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("currentUser"));
   const isAuthenticated = useSelector((state)=> state.authState.isAuthenticated)
   const dispatch = useDispatch()
 
