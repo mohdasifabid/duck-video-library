@@ -6,7 +6,6 @@ import "./Navbar.css";
 export const Navbar = () => {
   const { state, dispatch } = useAuthProvider();
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("currentUser"));
 
   return (
     <div className="duck-navbar-container">
@@ -22,17 +21,14 @@ export const Navbar = () => {
             navigate("/login");
           }}
         >
-          <i className="fa-solid fa-user"></i>
-          <span className="current-user-name-container">
-            {user.firstName + " " + user.lastName}
-          </span>
+        Logout
         </span>
       ) : (
         <span
           className="duck-navbar-item user-icon-container"
           onClick={() => navigate("/login")}
         >
-          <i className="fa-regular fa-user"></i>
+          Login
         </span>
       )}
     </div>
