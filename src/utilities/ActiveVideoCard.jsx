@@ -4,10 +4,9 @@ import { useEffect, useState } from "react";
 import { deleteCall, getCall, postCall } from "./reusableFunctions";
 import {
   getPlaylists,
-  getWatchLaterVideos,
 } from "../videoActionTypes";
 import {useDispatch,useSelector} from "react-redux"
-import { setLikedVideos } from "../features.js/userActivitySlice";
+import { setLikedVideos, setWatchLater } from "../features.js/userActivitySlice";
 
 export const ActiveVideoCard = ({ item }) => {
   const { state, dispatch } = useVideo();
@@ -16,6 +15,7 @@ export const ActiveVideoCard = ({ item }) => {
   const [selectedPlaylist, setSelectedPlaylist] = useState({});
   const reduxDispatch = useDispatch()
   const likedVideos = useSelector(state=>state.activityState.likedVideos)
+  const watchlaterVideos = useSelector(state => state.activityState.watchLater)
 
   useEffect(async () => {
     const data = await getCall(`/api/user/playlists`);
@@ -56,16 +56,17 @@ export const ActiveVideoCard = ({ item }) => {
     const data = await postCall("/api/user/watchlater", {
       video: watchlaterVideo,
     });
-    dispatch({ type: getWatchLaterVideos, payload: data.watchlater });
+    reduxDispatch(setWatchLater(data.watchlater))
   };
 
   const deleteFromWatchLaterHandler = async (id) => {
     const data = await deleteCall(`/api/user/watchlater/${id}`);
-    dispatch({ type: getWatchLaterVideos, payload: data.watchlater });
+    reduxDispatch(setWatchLater(data.watchlater))
+
   };
 
   const inLikedVideos = likedVideos.some((vid) => vid._id === item._id);
-  const inWatchlaterVideos = state.watchlaterVideos.some(
+  const inWatchlaterVideos = watchlaterVideos.some(
     (vid) => vid._id === item._id
   );
   return (

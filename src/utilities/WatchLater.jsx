@@ -1,21 +1,24 @@
 import { useEffect } from "react";
-import { useVideo } from "../useVideo";
 import { deleteCall, getCall } from "./reusableFunctions";
 import "./WatchLater.css";
 import { useNavigate } from "react-router-dom";
 import { Layout } from "./Layout";
-import { getWatchLaterVideos } from "../videoActionTypes";
+import { useDispatch, useSelector } from "react-redux";
+import { setWatchLater } from "../features.js/userActivitySlice";
 
 export const WatchLater = () => {
-  const { state, dispatch } = useVideo();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const watchlaterVideos = useSelector(
+    (state) => state.activityState.watchLater
+  );
   useEffect(async () => {
     const data = await getCall("/api/user/watchlater");
-    dispatch({ type: getWatchLaterVideos, payload: data.watchlater });
+    dispatch(setWatchLater(data.watchlater));
   }, []);
   const deleteWatchedlaterVideoHandler = async (id) => {
     const data = await deleteCall(`/api/user/watchlater/${id}`);
-    dispatch({ type: getWatchLaterVideos, payload: data.watchlater });
+    dispatch(setWatchLater(data.watchlater));
   };
 
   return (
@@ -23,7 +26,7 @@ export const WatchLater = () => {
       <h2>Watch Later</h2>
       <div className="watch-later-videos-container">
         <div>
-          {state.watchlaterVideos.map((watchLaterVid) => {
+          {watchlaterVideos?.map((watchLaterVid) => {
             return (
               <div className="list" key={watchLaterVid._id}>
                 <li onClick={() => navigate(`/videos/${watchLaterVid._id}`)}>
