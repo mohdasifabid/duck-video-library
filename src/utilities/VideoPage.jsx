@@ -1,22 +1,22 @@
 import "./VideoPage.css";
 import { Layout } from "./Layout";
-import { useVideo } from "../useVideo";
 import { VideoCard } from "./VideoCard";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getCall } from "./reusableFunctions";
 import { ActiveVideoCard } from "./ActiveVideoCard";
+import { useSelector } from "react-redux";
 
 export const VideoPage = () => {
   const [video, setVideo] = useState({});
-  const { state } = useVideo();
   const { id } = useParams();
+  const videos = useSelector((state) => state.videoState.videos);
   useEffect(async () => {
     const data = await getCall(`/api/video/${id}`);
     setVideo(data.video);
   }, [id]);
 
-  const excludePlayingVideoFromVideos = state.videos.filter(
+  const excludePlayingVideoFromVideos = videos.filter(
     (vid) => vid.vLink !== video.vLink
   );
 

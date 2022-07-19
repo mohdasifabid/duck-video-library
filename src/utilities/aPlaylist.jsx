@@ -1,42 +1,32 @@
-import axios from "axios";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-import { useVideo } from "../useVideo";
 import { Navbar } from "./Navbar";
 import "./Playlist.css";
 import { VideoCard } from "./VideoCard";
+import { getCall } from "./reusableFunctions";
 
-export const Aplaylist = ({ item }) => {
-  const { state, dispatch } = useVideo();
+export const Aplaylist = () => {
   const [playlistData, setPlaylistData] = useState([]);
   const { id } = useParams();
-  useEffect(() => {
-    const getPlaylistVideosById = async (id) => {
-      const token = localStorage.getItem("encodedToken");
-      const response = await axios.get(`/api/user/playlists/${id}`, {
-        headers: {
-          authorization: token,
-        },
-      });
-      if (response.status === 200) {
-        setPlaylistData(response.data.playlist.videos);
-      }
-    };
-    getPlaylistVideosById(id);
+  useEffect(async () => {
+    const newdata = await getCall(`/api/user/playlists/${id}`);
+    setPlaylistData(newdata.playlist.videos);
   }, []);
-
   return (
     <div>
       <Navbar />
       <div className="playlist-body">
         <div className="playlist-body-content">
-          {playlistData.map((item) => {
+          {playlistData?.map((item) => {
             return (
-              <p className="playlist-body-content-playlist-name">
+              <div
+                className="playlist-body-content-playlist-name"
+                key={item._id}
+              >
                 <strong>{item.title}</strong>
                 <VideoCard item={item} type="aplaylist" />
-              </p>
+              </div>
             );
           })}
         </div>

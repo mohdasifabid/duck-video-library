@@ -1,29 +1,30 @@
 import "./Playlist.css";
 import { Layout } from "./Layout";
 import { useEffect } from "react";
-import { useVideo } from "../useVideo";
 import { useNavigate } from "react-router-dom";
 import { deleteCall, getCall } from "./reusableFunctions";
-import { getPlaylists } from "../videoActionTypes";
+import { useDispatch, useSelector } from "react-redux";
+import { setPlaylist } from "../features.js/userActivitySlice";
 
 export const Playlist = () => {
-  const { state, dispatch } = useVideo();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const playlist = useSelector((state) => state.activityState.playlist);
   useEffect(async () => {
-    const data = await getCall("/api/user/playlists");
-    dispatch({ type: getPlaylists, payload: data.playlists });
+    const data = await getCall(`/api/user/playlists`);
+    dispatch(setPlaylist(data.playlists));
   }, []);
 
   const deletePlaylistHandler = async (id) => {
     const data = await deleteCall(`/api/user/playlists/${id}`);
-    dispatch({ type: getPlaylists, payload: data.playlists });
+    dispatch(setPlaylist(data.playlists));
   };
   return (
     <Layout>
       <div className="playlist-heading-clear-btn-container">
         <h2>Playlist</h2>
       </div>
-      {state.playlist.map((item) => {
+      {playlist?.map((item) => {
         return (
           <div className="list" key={item._id}>
             <li onClick={() => navigate(`/playlist/${item._id}`)}>

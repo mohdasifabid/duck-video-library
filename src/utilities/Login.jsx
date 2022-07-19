@@ -1,22 +1,22 @@
 import "./Login.css";
 import { useState } from "react";
 import { postCall } from "./reusableFunctions";
-import { useAuthProvider } from "./authProvider";
-import { getLoginStatus } from "../authActionTypes";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setAuthentication } from "../features.js/authSlice";
 
 export const Login = () => {
-  const { dispatch: authDispatch } = useAuthProvider();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const saveEmailPassword = async () => {
     const data = await postCall("/api/auth/login", {
       email: email,
       password: password,
     });
-    authDispatch({ type: getLoginStatus, payload: true });
+    dispatch(setAuthentication(true))
     localStorage.setItem("encodedToken", data.encodedToken);
     localStorage.setItem("currentUser", JSON.stringify(data.foundUser));
     navigate("/");
@@ -26,7 +26,7 @@ export const Login = () => {
       email: "ducktube@gmail.com",
       password: "duckTube123",
     });
-    authDispatch({ type: getLoginStatus, payload: true });
+    dispatch(setAuthentication(true))
     localStorage.setItem("encodedToken", data.encodedToken);
     localStorage.setItem("currentUser", JSON.stringify(data.foundUser));
     navigate("/");

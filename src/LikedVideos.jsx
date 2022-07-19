@@ -1,57 +1,43 @@
-import axios from "axios";
 import { useEffect } from "react";
 import "./utilities/WatchLater.css";
-import { useVideo } from "./useVideo";
 import { Layout } from "./utilities/Layout";
 import { useNavigate } from "react-router-dom";
-import { deleteCall } from "./utilities/reusableFunctions";
-import { getLikedVideos } from "./videoActionTypes";
+import { deleteCall, getCall } from "./utilities/reusableFunctions";
+import { useDispatch, useSelector } from "react-redux";
+import { setLikedVideos } from "./features.js/userActivitySlice";
 
 export const LikedVideos = () => {
-  const { state, dispatch } = useVideo();
   const navigate = useNavigate();
-  useEffect(() => {
-    const getLikedVideosHandler = async () => {
-      const token = localStorage.getItem("encodedToken");
-      const response = await axios.get("/api/user/likes", {
-        headers: {
-          authorization: token,
-        },
-      });
-      if (response.status === 200) {
-        dispatch({ type: getLikedVideos, payload: response.data.likes });
-      }
-    };
-    getLikedVideosHandler();
+  const dispatch = useDispatch();
+  const likedVideos = useSelector((state) => state.activityState.likedVideos);
+  useEffect(async () => {
+    const data = await getCall("/api/user/likes");
+    dispatch(setLikedVideos(data.likes));
   }, []);
 
   const deleteLikedVideoHandler = async (id) => {
     const data = await deleteCall(`/api/user/likes/${id}`);
-    dispatch({ type: getLikedVideos, payload: data.likes });
+    dispatch(setLikedVideos(data.likes));
   };
   return (
     <Layout>
       <h2>Liked videos</h2>
       <div className="watch-later-videos-container">
-        {state.likedVideos.length > 0 && (
-          <div>
-            {state.likedVideos.map((likedV) => {
-              return (
-                <div className="list" key={likedV._id}>
-                  <li onClick={() => navigate(`/videos/${likedV._id}`)}>
-                    {likedV.title}
-                  </li>
-                  <span>
-                    <i
-                      className="fa-solid fa-trash"
-                      onClick={() => deleteLikedVideoHandler(likedV._id)}
-                    ></i>
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        )}
+        {likedVideos?.map((likedV) => {
+          return (
+            <div className="list" key={likedV._id}>
+              <li onClick={() => navigate(`/videos/${likedV._id}`)}>
+                {likedV.title}
+              </li>
+              <span>
+                <i
+                  className="fa-solid fa-trash"
+                  onClick={() => deleteLikedVideoHandler(likedV._id)}
+                ></i>
+              </span>
+            </div>
+          );
+        })}
       </div>
     </Layout>
   );

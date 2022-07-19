@@ -1,27 +1,30 @@
 import "./History.css";
 import { Layout } from "./Layout";
 import { useEffect } from "react";
-import { useVideo } from "../useVideo";
 import { useNavigate } from "react-router-dom";
-import { getHistory } from "../videoActionTypes";
 import { deleteCall, getCall } from "./reusableFunctions";
+import {useDispatch, useSelector} from "react-redux"
+import { setHistory } from "../features.js/userActivitySlice";
 
 export const History = () => {
-  const { state, dispatch } = useVideo();
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const history = useSelector(state=>state.activityState.history)
 
   useEffect(async () => {
     const data = await getCall("/api/user/history");
-    dispatch({ type: getHistory, payload: data.history });
+    dispatch(setHistory(data.history))
   }, []);
 
   const deleteHistory = async () => {
     const data = await deleteCall("/api/user/history/all");
-    dispatch({ type: getHistory, payload: data.history });
+    dispatch(setHistory(data.history))
+
   };
   const deleteVideoFromHistory = async (id) => {
     const data = await deleteCall(`/api/user/history/${id}`);
-    dispatch({ type: getHistory, payload: data.history });
+    dispatch(setHistory(data.history))
+
   };
 
   return (
@@ -34,8 +37,8 @@ export const History = () => {
       </div>
       <div className="history-videos-container">
         <div>
-          {state.history &&
-            state.history.map((hvideo) => {
+          {
+            history?.map((hvideo) => {
               return (
                 <div className="list" key={hvideo._id}>
                   <li onClick={() => navigate(`/videos/${hvideo._id}`)}>

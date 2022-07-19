@@ -8,20 +8,21 @@ import { Routes, Route } from "react-router-dom";
 import { Playlist } from "./utilities/Playlist";
 import { VideoPage } from "./utilities/VideoPage";
 import { Aplaylist } from "./utilities/aPlaylist";
-import { getLoginStatus } from "./authActionTypes";
 import { WatchLater } from "./utilities/WatchLater";
 import { PrivateRoute } from "./utilities/PrivateRoute";
-import { useAuthProvider } from "./utilities/authProvider";
 import { TrendingVideos } from "./utilities/TrendingVideos";
+import {useDispatch, useSelector} from "react-redux"
+import { setAuthentication } from "./features.js/authSlice";
 
 function App() {
-  const { dispatch: authDispatch, state: authState } = useAuthProvider();
+  const dispatch = useDispatch()
+  const isAuthenticated = useSelector((state)=>state.authState.isAuthenticated  )
   useEffect(async () => {
     const token = localStorage.getItem("encodedToken");
     if (token) {
-      authDispatch({ type: getLoginStatus, payload: true });
+      dispatch(setAuthentication(true));
     } else {
-      authDispatch({ type: getLoginStatus, payload: false });
+      dispatch(setAuthentication(false));
     }
   }, []);
 
@@ -43,7 +44,7 @@ function App() {
         <Route path="/liked" element={<PrivateRoute />}>
           <Route path="/liked" element={<LikedVideos />} />
         </Route>
-        {authState.isLogin ? (
+        {isAuthenticated ? (
           <Route path="/login" element={<TrendingVideos />} />
         ) : (
           <Route path="/login" element={<Login />} />

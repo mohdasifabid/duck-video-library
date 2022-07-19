@@ -1,21 +1,24 @@
 import "./TrendingVideos.css";
 import { Navbar } from "./Navbar";
 import { VideoCard } from "./VideoCard";
-import { useVideo } from "../useVideo";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getCall } from "./reusableFunctions";
-import { getCategories, getVideos } from "../videoActionTypes";
+import { useDispatch, useSelector } from "react-redux";
+import { setVideos } from "../features.js/videoSlice";
+import { setCategory } from "../features.js/categorySlice";
 
 export const TrendingVideos = () => {
-  const { state, dispatch } = useVideo();
   const [categoryChecker, setCategoryCheck] = useState("");
+  const dispatch = useDispatch()
+  const videosData = useSelector((state)=>state.videoState.videos)
+  const categories = useSelector((state)=>state.categoryState.categories)
 
   useEffect(async () => {
     const data = await getCall("/api/categories");
-    dispatch({ type: getCategories, payload: data.categories });
+    dispatch(setCategory(data.categories))
     const videoData = await getCall("api/videos");
-    dispatch({ type: getVideos, payload: videoData.videos });
+    dispatch(setVideos(videoData.videos))
   }, []);
 
   const filterCategory = (data, checker) => {
@@ -31,8 +34,7 @@ export const TrendingVideos = () => {
     }
     return newData;
   };
-
-  const updatedData = filterCategory(state.videos, categoryChecker);
+  const updatedData = filterCategory(videosData, categoryChecker);
   return (
     <div>
       <Navbar />
@@ -79,7 +81,7 @@ export const TrendingVideos = () => {
         </Link>
       </ol>
       <div className="category-container">
-        {state.categories.map((cat) => {
+        {categories.map((cat) => {
           return (
             <button
               className="category-box"

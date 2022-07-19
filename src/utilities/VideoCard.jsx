@@ -1,15 +1,15 @@
 import "./VideoCard.css";
-import { useVideo } from "../useVideo";
 import { postCall } from "./reusableFunctions";
-import { getHistory } from "../videoActionTypes";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux/es/exports";
+import { setHistory } from "../features.js/userActivitySlice";
 
 export const VideoCard = ({ item, type }) => {
-  const { dispatch } = useVideo();
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const postHistory = async (video) => {
     const data = postCall("/api/user/history", { video });
-    dispatch({ type: getHistory, payload: data.history });
+    dispatch(setHistory(data.history))
     navigate(`/videos/${item._id}`);
   };
 
