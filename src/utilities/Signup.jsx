@@ -2,12 +2,9 @@ import "./Login.css";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuthProvider } from "./authProvider";
-import { getSignUpStatus } from "../authActionTypes";
 
 export const Signup = () => {
   const navigate = useNavigate();
-  const { dispatch } = useAuthProvider();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,11 +18,7 @@ export const Signup = () => {
       password: password,
       confirmedPassword: confirmedPassword,
     });
-    if (response.status === 200) {
-      dispatch({ type: getSignUpStatus, payload: true });
-    } else {
-      dispatch({ type: getSignUpStatus, payload: true });
-    }
+    
     navigate("/login");
   };
 
