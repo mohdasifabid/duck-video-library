@@ -8,14 +8,15 @@
     justify-content: space-between;
 }
 .history-videos-clear-btn{
-    width: 10rem;
-    background-color: red;
-    color: white;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: .5rem 1rem;
+    cursor: pointer;
 }
-/* .history-videos-clear-btn:hover{
-    background-color: var(--secondary-color);
-    color: red;
-} */
+.history-videos-clear-btn:hover{
+    background-color: var(--primary-color);
+    color: #fff;
+}
 .history-videos-container{
     width: 100%;
     display: flex;

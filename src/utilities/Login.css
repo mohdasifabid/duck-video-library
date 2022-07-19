@@ -1,35 +1,52 @@
 .login-page-body-content{
+    height: 100vh;
+    align-items: center;
     display: flex;
     justify-content: center;
 }
 
 .login-inputs-btn-link-container{
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
-    margin: 2rem;
-    width: 20rem;
-    box-shadow: 0rem .01rem .15rem .1rem var(--primary-color);
-    border-radius: 1rem;
+    padding: 2rem 3rem 3rem 3rem;
+    border: 2px solid var(--secondary-color);
 }
 .login-page-body-content input:focus{
     outline: none;
-    border: .1rem solid var(--primary-color);
+    border: 1px solid var(--primary-color);
 }
 .login-page-body-content input{
+    width: 95%;
     outline: none;
-    border: .1rem solid var(--primary-color);
+    border: 1px solid var(--secondary-color);
     margin-bottom: 1rem;
-    border-radius: .25rem;
-    padding-left:  1.5rem;
+    padding: .75rem 0 .75rem .5rem;
+
 }
 .login-page-body-content div{
     text-align: center;
-    font-size: large;
-    font-weight: bold;
-    padding-bottom: .5rem;
+    padding-bottom: .25rem;
 
+}
+.login-inputs-btn-link-container button{
+    width: 100%;
+    border: none;
+    padding: .75rem .125rem;
+    border: 1px solid var(--secondary-color);
+    cursor: pointer;
+}
+.login-inputs-btn-link-container button:hover{
+   background-color: var(--primary-color);
+   color: #fff;
+}
+.loginBtn{
+    margin-top: 1rem;
+    margin-bottom: .5rem;
+}
+.login-inputs-btn-link-container a{
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
 }

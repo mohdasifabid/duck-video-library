@@ -1,5 +1,5 @@
 .video-card-container {
-  width: 300px;
+  /* width: 220px; */
   position: relative;
 }
 .video-card-media {
@@ -9,22 +9,19 @@
 .video-card-btn {
   width: 100%;
   background-color: var(--primary-color);
-  color: var(--secondary-color);
+  color: #fff;
+  font-size: large;
+  font-weight: normal;
 }
 .video-card-title {
   margin: 0.25rem 0 0 0.25rem;
+  font-size: normal;
+  
 }
 .video-card-sub-title {
-  margin: 0 0 0.25rem 0.25rem;
+  margin: 0 0 .25rem .25rem;
+  font-size: small;
+  font-weight: bold;
 }
-.video-card-like-icon {
-  position: absolute;
-  font-size: larger;
-  color: var(--secondary-color);
-  top: 0.7rem;
-  right: 1rem;
-  cursor: pointer;
-}
-.video-card-like-icon:hover {
-  color: white;
-}
+
+

@@ -1,52 +1,39 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { getLoginStatus } from "../authActionTypes";
 import { useAuthProvider } from "./authProvider";
+import "./Navbar.css";
+
 export const Navbar = () => {
   const { state, dispatch } = useAuthProvider();
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("currentUser"));
+
   return (
-    <div
-      className="duck-navbar-container"
-      style={{
-        borderTop: "none",
-        borderBottom: ".125rem solid black",
-        padding: ".5rem 0",
-      }}
-    >
-      <Link className="duck-navbar-left-items" to="/">
-        <a href="" className="duck-navbar-brand duck-navbar-item">
-          MyBrand
-        </a>
+    <div className="duck-navbar-container">
+      <Link className="duck-navbar-item duck-nav-brand" to="/">
+        MyBrand
       </Link>
-      <div className="duck-navbar-right-items"></div>
       {state.isLogin ? (
-        <button
-          style={{
-            width: "8rem",
-            height: ".75rem",
-            margin: ".4rem 1rem ",
-            border: "none",
-          }}
-          className="duck-primary-btn-s duck-primary-btn"
+        <span
+          className="duck-navbar-item"
           onClick={() => {
-            dispatch({ type: "LOGIN_STATUS", payload: false });
+            dispatch({ type: getLoginStatus, payload: false });
             localStorage.removeItem("encodedToken");
+            navigate("/login");
           }}
         >
-          Logout
-        </button>
+          <i className="fa-solid fa-user"></i>
+          <span className="current-user-name-container">
+            {user.firstName + " " + user.lastName}
+          </span>
+        </span>
       ) : (
-        <Link to="/login">
-          <button
-            style={{
-              width: "8rem",
-              height: ".75rem",
-              margin: ".4rem 1rem ",
-              border: "none",
-            }}
-            className="duck-primary-btn-s duck-primary-btn"
-          >
-            Login
-          </button>
-        </Link>
+        <span
+          className="duck-navbar-item user-icon-container"
+          onClick={() => navigate("/login")}
+        >
+          <i className="fa-regular fa-user"></i>
+        </span>
       )}
     </div>
   );

@@ -1,3 +1,6 @@
+.common-container{
+    display: flex;
+}
 .playlist-body{
     width: 90%;
     margin: 0 5%;
@@ -8,9 +11,14 @@
     justify-content: space-between;
 }
 .playlist-clear-btn{
-    width: 10rem;
-    background-color: red;  
-    color: white;
+    border: 1px solid var(--primary-color);
+    padding: .5rem 1rem;
+    color: var(--primary-color);
+    cursor: pointer;
+}
+.playlist-clear-btn:hover{
+    background-color: var(--primary-color);
+    color: #fff;
 }
 .playlist-body-content{
     width: 40%;

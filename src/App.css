@@ -1,0 +1,32 @@
+
+.list{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem 1rem;
+    width: fit-content;
+}
+.list li{
+    margin-right: 3rem;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.list i{
+    cursor: pointer;
+}
+.mobile-navigation{
+    display: flex;
+}
+.mobile-navigation i{
+    font-size: x-large;
+}
+@media (min-width: 520px){
+    .mobile-navigation{
+        display: none;
+    }
+}
+
+.child-container{
+    width: 90%;
+    margin: 0 5%;
+}

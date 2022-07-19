@@ -1,10 +1,43 @@
-
+.trending-page-body{
+display: flex;
+}
 .trending-videos-heading{
     text-align: center;
 }
 .trending-videos-card-container{
 display: flex;   
-justify-content: center;
+align-content: center;
 flex-wrap: wrap;
 gap: 2rem;
+margin: 0.5rem 0 1.5rem 1.5rem;
 } 
+.category-container{
+    display: flex;
+    justify-content: center;
+}
+.category-box {
+    border-radius: 1rem;
+    padding: .4rem .9rem;
+    margin:  .5rem  .5rem .25rem .5rem;
+    width: fit-content;
+    font-size: small;
+    cursor: pointer;
+    border: 1px solid var(--secondary-color);
+    background-color: #fff;
+ }
+
+ .category-box:focus{
+     font-weight: 700;
+ }
+ 
+ .duck-list-content-type-items{
+     display: flex;
+     gap: .75rem;
+     margin-right: 2rem;
+     padding-left: .25rem;
+ }
+ .duck-list-content-type{
+     border-right: 1px solid var(--secondary-color);
+
+ }
+

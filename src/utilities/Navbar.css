@@ -1,0 +1,23 @@
+.duck-navbar-item{
+    margin-right: 3rem;
+    margin-top: .75rem;
+    margin-bottom: .75rem;
+}
+.duck-nav-brand{
+    margin-left: 3rem;
+}
+.duck-navbar-container{
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1000;
+
+}
+
+.user-icon-container{
+    cursor: pointer;
+}
+.current-user-name-container{
+font-weight: 400;
+padding-left: .5rem;
+}

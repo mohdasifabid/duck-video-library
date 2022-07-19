@@ -1,34 +1,13 @@
 .category-container{ 
     display: flex;
     justify-content: center;
-
+    margin-top: .125rem;
 }
-
-.category-box {
-   background-color: var(--secondary-color);
-   border-radius: .25rem;
-   padding: .5rem 1rem;
-   margin:  2rem 2rem 2rem 2rem;
-   width: fit-content;
-   font-size: large;
-   font-weight: bold;
-   cursor: pointer;
-   display: inline;
-
-}
-.category-box:hover{
-   box-shadow: 1px 1px 1px 1px var(--primary-color);
-}
-
-.landing-page-body-container{
-    display: flex;
-    margin: 1rem 1rem 1rem 0rem;
-}
-
 
 .duck-list-content-type{
+   margin-top: 0;
    width: 8rem;
-   padding-right: 2rem;
+   padding-right: 1rem;
    padding-left: 1rem;
 
 }
