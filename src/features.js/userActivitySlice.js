@@ -2,7 +2,8 @@ import {createSlice} from "@reduxjs/toolkit"
 
 const initialState = {
    likedVideos: [],
-   watchLater: []
+   watchLater: [],
+   playlist: []
 }
 
 const userActivitySlice = createSlice({
@@ -14,10 +15,13 @@ const userActivitySlice = createSlice({
         },
         setWatchLater: (state,action)=>{
             state.watchLater = action.payload
+        },
+        setPlaylist: (state, action) => {
+            state.playlist = action.payload
         }
     }
 
 })
 
-export const {setLikedVideos, setWatchLater} = userActivitySlice.actions
+export const {setLikedVideos, setWatchLater, setPlaylist} = userActivitySlice.actions
 export default userActivitySlice.reducer

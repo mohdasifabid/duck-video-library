@@ -1,6 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
 import {
-  getPlaylists,
   getHistory,
 } from "./videoActionTypes";
 
@@ -10,11 +9,7 @@ const useVideo = () => useContext(VideoContext);
 const videoReducer = (state, action) => {
   switch (action.type) {
    
-    case getPlaylists:
-      return {
-        ...state,
-        playlist: action.payload,
-      };
+   
     case getHistory:
       return {
         ...state,
@@ -26,7 +21,6 @@ const videoReducer = (state, action) => {
   }
 };
 const initialState = {
-  playlist: [],
   history: [],
 };
 const VideoProvider = ({ children }) => {
