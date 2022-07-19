@@ -6,6 +6,8 @@ import { makeServer } from "./server";
 import { VideoProvider } from "./useVideo";
 import {BrowserRouter as Router} from "react-router-dom";
 import { AuthProvider } from "./utilities/authProvider";
+import { Provider } from "react-redux";
+import {store} from "./features.js/store"
 // Call make Server
 makeServer();
 
@@ -14,7 +16,9 @@ ReactDOM.render(
     <AuthProvider> 
     <VideoProvider>
       <Router>
+        <Provider store={store}>
       <App />
+      </Provider>
       </Router>
     </VideoProvider>
     </AuthProvider>
