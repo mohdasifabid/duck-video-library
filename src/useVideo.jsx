@@ -1,7 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
 import {
-  getVideos,
-  getCategories,
   getWatchLaterVideos,
   getPlaylists,
   getHistory,
@@ -13,16 +11,6 @@ const useVideo = () => useContext(VideoContext);
 
 const videoReducer = (state, action) => {
   switch (action.type) {
-    case getVideos:
-      return {
-        ...state,
-        videos: action.payload,
-      };
-    case getCategories:
-      return {
-        ...state,
-        categories: action.payload,
-      };
     case getLikedVideos:
       return {
         ...state,
@@ -49,8 +37,6 @@ const videoReducer = (state, action) => {
   }
 };
 const initialState = {
-  // videos: [],
-  categories: [],
   likedVideos: [],
   watchlaterVideos: [],
   playlist: [],

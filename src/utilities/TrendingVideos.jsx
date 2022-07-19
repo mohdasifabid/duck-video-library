@@ -1,25 +1,23 @@
 import "./TrendingVideos.css";
 import { Navbar } from "./Navbar";
 import { VideoCard } from "./VideoCard";
-import { useVideo } from "../useVideo";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getCall } from "./reusableFunctions";
-import { getCategories, getVideos } from "../videoActionTypes";
 import { useDispatch, useSelector } from "react-redux";
 import { setVideos } from "../features.js/videoSlice";
+import { setCategory } from "../features.js/categorySlice";
 
 export const TrendingVideos = () => {
-  const { state, dispatch: contextDispatch } = useVideo();
   const [categoryChecker, setCategoryCheck] = useState("");
   const dispatch = useDispatch()
   const videosData = useSelector((state)=>state.videoState.videos)
+  const categories = useSelector((state)=>state.categoryState.categories)
 
   useEffect(async () => {
     const data = await getCall("/api/categories");
-    contextDispatch({ type: getCategories, payload: data.categories });
+    dispatch(setCategory(data.categories))
     const videoData = await getCall("api/videos");
-    // contextDispatch({ type: getVideos, payload: videoData.videos });
     dispatch(setVideos(videoData.videos))
   }, []);
 
@@ -83,7 +81,7 @@ export const TrendingVideos = () => {
         </Link>
       </ol>
       <div className="category-container">
-        {state.categories.map((cat) => {
+        {categories.map((cat) => {
           return (
             <button
               className="category-box"
