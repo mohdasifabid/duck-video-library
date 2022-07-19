@@ -11,7 +11,7 @@ export const Playlist = () => {
   const dispatch = useDispatch();
   const playlist = useSelector((state) => state.activityState.playlist);
   useEffect(async () => {
-    const data = await getCall("/api/user/playlists");
+    const data = await getCall(`/api/user/playlists`);
     dispatch(setPlaylist(data.playlists));
   }, []);
 

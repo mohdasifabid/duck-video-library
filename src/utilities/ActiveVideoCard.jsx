@@ -42,10 +42,9 @@ export const ActiveVideoCard = ({ item }) => {
         title: playlistName,
       },
     });
-    const foundPlaylist = playlist.find(
+    const foundPlaylist = data.playlists.find(
       (plist) => plist.title === playlistName
     );
-
     const videoData = await postCall(
       `/api/user/playlists/${foundPlaylist._id}`,
       {
